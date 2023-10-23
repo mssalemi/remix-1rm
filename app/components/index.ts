@@ -1,0 +1,1 @@
+export { OneRepMaxCalculator } from "./OneRepMaxCalculator";
