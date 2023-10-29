@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect } from "react";
 import { repMaxPercentages } from "../../utils/helpers";
-import { Card, Table, Tag } from "antd";
+import { Card, Table, Tag, Progress } from "antd";
 
 interface TableItem {
   key: string;
@@ -30,7 +30,14 @@ const repsMaxColumns = [
     dataIndex: "percentage",
     key: "percentage",
     render: (percentage: number) => {
-      return <Tag color="geekblue">{percentage} %</Tag>;
+      // return <Tag color="geekblue">{percentage} %</Tag>;
+      return (
+        <Progress
+          percent={percentage}
+          showInfo={true}
+          format={() => `${percentage}%`}
+        />
+      );
     },
   },
 ];
@@ -60,7 +67,7 @@ export function DisplayTable({ oneRepMax }: { oneRepMax: number }) {
         dataIndex: "weight",
         key: "weight",
         render: (weight: number) => {
-          return <Tag color="geekblue">{weight} lbs</Tag>;
+          return <Tag color="blue">{weight} lbs</Tag>;
         },
       },
       repsMaxColumns[1],

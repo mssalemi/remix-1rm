@@ -1,0 +1,1 @@
+export { OneRepMaxDisplay } from "./OneRepMaxDisplay";

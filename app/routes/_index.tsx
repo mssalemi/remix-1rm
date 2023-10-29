@@ -3,7 +3,12 @@ import { useEffect, useState } from "react";
 import type { MetaFunction } from "@remix-run/node";
 import { Row, Col } from "antd";
 
-import { OneRepMaxCalculator, DisplayTable, TipsDisplay } from "../components/";
+import {
+  OneRepMaxCalculator,
+  DisplayTable,
+  TipsDisplay,
+  OneRepMaxDisplay,
+} from "../components/";
 
 export const meta: MetaFunction = () => {
   return [
@@ -38,7 +43,7 @@ export default function Index() {
           }}
         >
           <Col>
-            <p>One Rep Max: {oneRepMax}</p>
+            <OneRepMaxDisplay oneRepMax={oneRepMax} />
           </Col>
         </Row>
         <Row
@@ -46,16 +51,12 @@ export default function Index() {
             justifyContent: "space-between",
           }}
         >
-          <Col
-            md={24}
-            lg={12}
-            style={{
-              padding: "0.5rem",
-            }}
-          >
+          <Col xs={24} sm={24} md={24} lg={12}>
             <DisplayTable oneRepMax={oneRepMax} />
           </Col>
           <Col
+            xs={24}
+            sm={24}
             md={24}
             lg={12}
             style={{

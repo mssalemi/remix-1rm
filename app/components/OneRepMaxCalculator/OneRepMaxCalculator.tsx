@@ -44,37 +44,51 @@ function OneRepMaxForm({
   };
 
   return (
-    <Form
-      name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600 }}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      onFinishFailed={onFinishFailed}
-      autoComplete="off"
+    <div
+      style={{
+        padding: "1rem",
+      }}
     >
-      <Form.Item<FieldType>
-        label="Weight"
-        name="weight"
-        rules={[{ required: true, message: "Enter weight lifted" }]}
+      <Form
+        name="basic"
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+        labelCol={{ span: 4 }}
+        wrapperCol={{ span: 20 }}
+        labelAlign="left"
+        style={{
+          backgroundColor: "#F5F5F5",
+          padding: "1rem",
+        }}
       >
-        <Input />
-      </Form.Item>
+        <Form.Item<FieldType>
+          label="Weight"
+          name="weight"
+          rules={[{ required: true, message: "Enter weight lifted" }]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Form.Item<FieldType>
-        label="Reps"
-        name="reps"
-        rules={[{ required: true, message: "Enter repetitions completed" }]}
-      >
-        <Input />
-      </Form.Item>
+        <Form.Item<FieldType>
+          label="Reps"
+          name="reps"
+          rules={[{ required: true, message: "Enter repetitions completed" }]}
+        >
+          <Input />
+        </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={{
+            width: "100%",
+          }}
+        >
           Calculate
         </Button>
-      </Form.Item>
-    </Form>
+      </Form>
+    </div>
   );
 }
