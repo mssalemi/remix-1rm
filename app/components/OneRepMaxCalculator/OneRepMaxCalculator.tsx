@@ -61,6 +61,7 @@ function OneRepMaxForm({
         style={{
           backgroundColor: "#F5F5F5",
           padding: "1rem",
+          borderRadius: "0.5rem",
         }}
       >
         <Form.Item<FieldType>

@@ -6,7 +6,7 @@ interface Props {
   oneRepMax: number;
 }
 
-const { Title, Text } = Typography;
+const { Text } = Typography;
 
 export function OneRepMaxDisplay({ oneRepMax }: Props) {
   const skeletonORM = (
@@ -29,6 +29,7 @@ export function OneRepMaxDisplay({ oneRepMax }: Props) {
         <Text
           style={{
             fontSize: "3rem",
+            textAlign: "center",
           }}
         >
           Your 1 Rep Max is{" "}
