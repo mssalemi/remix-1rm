@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
@@ -12,16 +10,13 @@ import {
   useNavigate,
 } from "@remix-run/react";
 
-import { Breadcrumb, Layout as AntDLayout, Menu, theme } from "antd";
+import { Layout as AntDLayout, Menu, theme, type MenuProps } from "antd";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
-const { Content, Footer, Sider } = AntDLayout;
-
-// example here
-// https://codesandbox.io/s/ygtdm6?file=/demo.tsx:1436-2007
+const { Content, Header } = AntDLayout;
 
 export default function App() {
   return (
@@ -37,7 +32,6 @@ export default function App() {
 }
 
 function Layout({ children }: { children: React.ReactNode }) {
-  const [collapsed, setCollapsed] = useState(false);
   let navigate = useNavigate();
 
   const {
@@ -76,38 +70,40 @@ function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body style={{ margin: 0 }}>
-        <AntDLayout style={{ minHeight: "100vh", margin: 0 }}>
-          <Sider
-            collapsible
-            collapsed={collapsed}
-            onCollapse={(value) => setCollapsed(value)}
+        <AntDLayout style={{ minHeight: "100vh" }}>
+          <Header
+            style={{
+              position: "sticky",
+              top: 0,
+              zIndex: 1,
+              display: "flex",
+              alignItems: "center",
+            }}
           >
-            <div className="demo-logo-vertical" />
             <Menu
               theme="dark"
-              defaultSelectedKeys={["1"]}
-              mode="inline"
+              mode="horizontal"
+              defaultSelectedKeys={["0"]}
               items={items}
               onClick={handleNavClick}
+              disabledOverflow={true}
             />
-          </Sider>
+          </Header>
           <AntDLayout>
             <Content style={{ margin: "0 16px" }}>
-              <Breadcrumb style={{ margin: "16px 0" }}>
+              {/* <Breadcrumb style={{ margin: "16px 0" }}>
                 <Breadcrumb.Item>User</Breadcrumb.Item>
                 <Breadcrumb.Item>Guest</Breadcrumb.Item>
-              </Breadcrumb>
+              </Breadcrumb> */}
               <div
                 style={{
                   paddingTop: 16,
-                  minHeight: 360,
                   background: colorBgContainer,
                 }}
               >
                 {children}
               </div>
             </Content>
-            <Footer style={{ textAlign: "center" }}>MedxMan Empire</Footer>
           </AntDLayout>
         </AntDLayout>
       </body>

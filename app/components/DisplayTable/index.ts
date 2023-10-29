@@ -1,0 +1,1 @@
+export { DisplayTable } from "./DisplayTable";

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import type { MetaFunction } from "@remix-run/node";
-import { Button, DatePicker, Row, Col } from "antd";
+import { Row, Col } from "antd";
 
-import { OneRepMaxCalculator } from "../components/";
+import { OneRepMaxCalculator, DisplayTable, TipsDisplay } from "../components/";
 
 export const meta: MetaFunction = () => {
   return [
@@ -31,15 +31,41 @@ export default function Index() {
           <OneRepMaxCalculator setOneRepMax={setOneRepMax} />
         </Col>
       </Row>
-      {oneRepMax > 0 && (
-        <Row>
-          <Col span={12}>col-12</Col>
-          <Col span={12}>col-12</Col>
+      <div>
+        <Row
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Col>
+            <p>One Rep Max: {oneRepMax}</p>
+          </Col>
         </Row>
-      )}
-
-      <Button type="primary">PRESS ME</Button>
-      <DatePicker placeholder="select date" />
+        <Row
+          style={{
+            justifyContent: "space-between",
+          }}
+        >
+          <Col
+            md={24}
+            lg={12}
+            style={{
+              padding: "0.5rem",
+            }}
+          >
+            <DisplayTable oneRepMax={oneRepMax} />
+          </Col>
+          <Col
+            md={24}
+            lg={12}
+            style={{
+              padding: "0.5rem",
+            }}
+          >
+            <TipsDisplay oneRepMax={oneRepMax} />
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }
