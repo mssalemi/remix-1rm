@@ -18,6 +18,21 @@ const formulasData = {
   lombardi: LOMBARDI,
 };
 
+const FORUMULAS = [
+  {
+    id: 0,
+    key: 0,
+    name: "Epley",
+    formuma: EPLEY,
+  },
+  {
+    id: 1,
+    key: 1,
+    name: "Lombardi",
+    formuma: LOMBARDI,
+  },
+];
+
 const { Title, Text } = Typography;
 
 const DESC =
@@ -49,6 +64,7 @@ function OneRepMaxForm({
   type FieldType = {
     weight?: number;
     reps?: number;
+    formula?: string;
   };
 
   const [checked, setChecked] = React.useState(false);
@@ -106,6 +122,8 @@ function OneRepMaxForm({
     });
   }, [formula]);
 
+  const [compareSelected, setCompareSelected] = React.useState("lombardi");
+
   return (
     <div
       style={{
@@ -155,7 +173,7 @@ function OneRepMaxForm({
                 gridTemplateColumns: "1fr 1fr",
               }}
             >
-              <Form.Item
+              <Form.Item<FieldType>
                 label="Formula"
                 name="formula"
                 style={{
@@ -178,11 +196,23 @@ function OneRepMaxForm({
                     easier to use for multiple reps.
                   </Text>
                 </Typography>
+                <Select
+                  defaultValue={compareSelected}
+                  onChange={setCompareSelected}
+                >
+                  {FORUMULAS.filter(
+                    (formu) => formula !== formu.name.toLowerCase()
+                  ).map((formula) => (
+                    <Select.Option value={formula.name} key={formula.id}>
+                      {formula.name}
+                    </Select.Option>
+                  ))}
+                </Select>
               </Form.Item>
               <div>
                 {" "}
                 <Table
-                  columns={columns}
+                  columns={[...columns]}
                   dataSource={data}
                   bordered
                   title={() => "Percentages of 1RM"}
