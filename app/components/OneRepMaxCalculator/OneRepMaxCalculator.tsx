@@ -77,7 +77,7 @@ function OneRepMaxForm({
 
   const columns = [
     {
-      title: "Reps",
+      title: <Tag>{"REPS"}</Tag>,
       dataIndex: "reps",
       key: "reps",
       render: (reps: number) => {
@@ -85,11 +85,11 @@ function OneRepMaxForm({
       },
     },
     {
-      title: "Percentage",
+      title: <Tag>{formula.toUpperCase()}</Tag>,
       dataIndex: "percentage",
       key: "percentage",
       render: (percentage: number) => {
-        return <Tag color="magenta">{percentage}%</Tag>;
+        return <Tag color="processing">{percentage}%</Tag>;
       },
     },
   ];
