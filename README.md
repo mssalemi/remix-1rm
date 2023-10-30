@@ -1,7 +1,7 @@
 
-## Vercel Deployment
+## MedxMan - Vercel Deployment
 
-https://remix-1rm-cxzhggoan-mehdis-projects-946ad532.vercel.app/
+https://remix-1rm.vercel.app/
 
 # Welcome to Remix!
 
