@@ -1,16 +1,19 @@
-import React from "react";
-
-import { Typography, Button, Form, Input, Switch, Select, Table } from "antd";
+import React, { useMemo } from "react";
 
 import {
-  calculateOneRepMax,
-  STANDARD,
-  EPLEY,
-  LOMBARDI,
-} from "../../utils/helpers";
+  Typography,
+  Button,
+  Form,
+  Input,
+  Switch,
+  Select,
+  Table,
+  Tag,
+} from "antd";
+
+import { calculateOneRepMax, EPLEY, LOMBARDI } from "../../utils/helpers";
 
 const formulasData = {
-  standard: STANDARD,
   epley: EPLEY,
   lombardi: LOMBARDI,
 };
@@ -40,7 +43,7 @@ function OneRepMaxForm({
   setOneRepMax: React.Dispatch<React.SetStateAction<number>>;
 }) {
   const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
+    console.log("[Failed]:", errorInfo);
   };
 
   type FieldType = {
@@ -54,36 +57,13 @@ function OneRepMaxForm({
     checked: boolean,
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
-    console.log("Customize RepMax Engine");
-    console.log("checked", checked);
     setChecked(checked);
   };
 
-  const data = STANDARD.map((row, index) => {
-    return {
-      key: `${index}rep`,
-      reps: index + 1,
-      percentage: row,
-    };
-  });
-
-  const columns = [
-    {
-      title: "Reps",
-      dataIndex: "reps",
-      key: "reps",
-    },
-    {
-      title: "Percentage",
-      dataIndex: "percentage",
-      key: "percentage",
-    },
-  ];
-
-  const [formula, setFormula] = React.useState("standard");
+  const [formula, setFormula] = React.useState("epley");
 
   const onFinish = ({ weight, reps }: { weight: number; reps: number }) => {
-    console.log("[Success]", weight, "x", reps);
+    // console.log("[Success]", weight, "x", reps);
 
     const oneRepMax = Math.round(
       calculateOneRepMax(
@@ -94,6 +74,37 @@ function OneRepMaxForm({
     );
     setOneRepMax(oneRepMax);
   };
+
+  const columns = [
+    {
+      title: "Reps",
+      dataIndex: "reps",
+      key: "reps",
+      render: (reps: number) => {
+        return <Tag color="geekblue">{reps}</Tag>;
+      },
+    },
+    {
+      title: "Percentage",
+      dataIndex: "percentage",
+      key: "percentage",
+      render: (percentage: number) => {
+        return <Tag color="magenta">{percentage}%</Tag>;
+      },
+    },
+  ];
+
+  const data = useMemo(() => {
+    const source = formulasData[formula as keyof typeof formulasData];
+
+    return source.map((row, index) => {
+      return {
+        key: `${index}rep`,
+        reps: index + 1,
+        percentage: row,
+      };
+    });
+  }, [formula]);
 
   return (
     <div
@@ -152,7 +163,6 @@ function OneRepMaxForm({
                 }}
               >
                 <Select defaultValue={formula} onChange={setFormula}>
-                  <Select.Option value="standard">Standard</Select.Option>
                   <Select.Option value="epley">Epley</Select.Option>
                   <Select.Option value="lombardi">Lombardi</Select.Option>
                 </Select>
