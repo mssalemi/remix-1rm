@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect } from "react";
-import { repMaxPercentages } from "../../utils/helpers";
+import { STANDARD } from "../../utils/helpers";
 import { Card, Table, Tag, Progress } from "antd";
 
 interface TableItem {
@@ -8,7 +8,7 @@ interface TableItem {
   percentage: number;
 }
 
-const repMaxTableItems: TableItem[] = repMaxPercentages.map((item, index) => {
+const repMaxTableItems: TableItem[] = STANDARD.map((item, index) => {
   return {
     key: `${index}repMax`,
     reps: index + 1,
