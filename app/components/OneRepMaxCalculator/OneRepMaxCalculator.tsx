@@ -1,39 +1,27 @@
-import React, { useMemo } from "react";
+import React from "react";
 
-import {
-  Typography,
-  Button,
-  Form,
-  Input,
-  Switch,
-  Select,
-  Table,
-  Tag,
-} from "antd";
+import { Typography, Button, Form, Input, Switch } from "antd";
 
-import { calculateOneRepMax, EPLEY, LOMBARDI } from "../../utils/helpers";
+import { calculateOneRepMax } from "../../utils/helpers";
+import { CompareFormulaDisplay } from "./CompareFormulaDisplay";
+import { EPLEY, LOMBARDI } from "../../utils/helpers";
 
-const formulasData = {
-  epley: EPLEY,
-  lombardi: LOMBARDI,
-};
+const { Title, Text } = Typography;
 
-const FORUMULAS = [
+const FORMULAS = [
   {
     id: 0,
     key: 0,
     name: "Epley",
-    formuma: EPLEY,
+    formula: EPLEY,
   },
   {
     id: 1,
     key: 1,
     name: "Lombardi",
-    formuma: LOMBARDI,
+    formula: LOMBARDI,
   },
 ];
-
-const { Title, Text } = Typography;
 
 const DESC =
   "Calculate your one-rep max (1RM) for any lift. Your one-rep max is the max weight you can lift for a single repetition for a given exercise";
@@ -57,6 +45,7 @@ function OneRepMaxForm({
 }: {
   setOneRepMax: React.Dispatch<React.SetStateAction<number>>;
 }) {
+  const [formula, setFormula] = React.useState("Epley");
   const onFinishFailed = (errorInfo: any) => {
     console.log("[Failed]:", errorInfo);
   };
@@ -76,53 +65,14 @@ function OneRepMaxForm({
     setChecked(checked);
   };
 
-  const [formula, setFormula] = React.useState("epley");
-
   const onFinish = ({ weight, reps }: { weight: number; reps: number }) => {
-    // console.log("[Success]", weight, "x", reps);
+    const currentFormula = FORMULAS.find((f) => f.name === formula);
 
     const oneRepMax = Math.round(
-      calculateOneRepMax(
-        weight,
-        reps,
-        formulasData[formula as keyof typeof formulasData]
-      )
+      calculateOneRepMax(weight, reps, currentFormula?.formula)
     );
     setOneRepMax(oneRepMax);
   };
-
-  const columns = [
-    {
-      title: <Tag>{"REPS"}</Tag>,
-      dataIndex: "reps",
-      key: "reps",
-      render: (reps: number) => {
-        return <Tag color="geekblue">{reps}</Tag>;
-      },
-    },
-    {
-      title: <Tag>{formula.toUpperCase()}</Tag>,
-      dataIndex: "percentage",
-      key: "percentage",
-      render: (percentage: number) => {
-        return <Tag color="processing">{percentage}%</Tag>;
-      },
-    },
-  ];
-
-  const data = useMemo(() => {
-    const source = formulasData[formula as keyof typeof formulasData];
-
-    return source.map((row, index) => {
-      return {
-        key: `${index}rep`,
-        reps: index + 1,
-        percentage: row,
-      };
-    });
-  }, [formula]);
-
-  const [compareSelected, setCompareSelected] = React.useState("lombardi");
 
   return (
     <div
@@ -166,61 +116,7 @@ function OneRepMaxForm({
         </Form.Item>
 
         {checked && (
-          <>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-              }}
-            >
-              <Form.Item<FieldType>
-                label="Formula"
-                name="formula"
-                style={{
-                  marginRight: "1rem",
-                }}
-              >
-                <Select defaultValue={formula} onChange={setFormula}>
-                  <Select.Option value="epley">Epley</Select.Option>
-                  <Select.Option value="lombardi">Lombardi</Select.Option>
-                </Select>
-                <Typography
-                  style={{
-                    marginTop: "1rem",
-                    marginRight: "1rem",
-                  }}
-                >
-                  <Text type="secondary">
-                    The standard formula is the most accurate for most people.
-                    It is based on the Epley formula, but modified to make it
-                    easier to use for multiple reps.
-                  </Text>
-                </Typography>
-                <Select
-                  defaultValue={compareSelected}
-                  onChange={setCompareSelected}
-                >
-                  {FORUMULAS.filter(
-                    (formu) => formula !== formu.name.toLowerCase()
-                  ).map((formula) => (
-                    <Select.Option value={formula.name} key={formula.id}>
-                      {formula.name}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </Form.Item>
-              <div>
-                {" "}
-                <Table
-                  columns={[...columns]}
-                  dataSource={data}
-                  bordered
-                  title={() => "Percentages of 1RM"}
-                  pagination={{ pageSize: 4 }}
-                />
-              </div>
-            </div>
-          </>
+          <CompareFormulaDisplay formula={formula} setFormula={setFormula} />
         )}
 
         <Button

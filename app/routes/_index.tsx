@@ -20,10 +20,6 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   const [oneRepMax, setOneRepMax] = useState<number>(0);
 
-  useEffect(() => {
-    console.log("[1RM]: ", oneRepMax);
-  }, [oneRepMax]);
-
   return (
     <div
       style={{

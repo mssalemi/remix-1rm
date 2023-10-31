@@ -74,12 +74,6 @@ export function DisplayTable({ oneRepMax }: { oneRepMax: number }) {
     ];
   }, [oneRepMax]);
 
-  useEffect(() => {
-    console.log("[1RM]: ", oneRepMax);
-    console.log("[list]: ", list);
-    console.log("[cols]: ", cols);
-  }, [oneRepMax, cols, list]);
-
   return (
     <Card style={{ height: "100%" }}>
       <Table
