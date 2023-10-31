@@ -2,9 +2,8 @@ import React from "react";
 
 import { Typography, Button, Form, Input, Switch } from "antd";
 
-import { calculateOneRepMax } from "../../utils/helpers";
+import { calculateOneRepMax, EPLEY, LOMBARDI } from "../../utils/helpers";
 import { CompareFormulaDisplay } from "./CompareFormulaDisplay";
-import { EPLEY, LOMBARDI } from "../../utils/helpers";
 
 const { Title, Text } = Typography;
 
@@ -12,13 +11,13 @@ const FORMULAS = [
   {
     id: 0,
     key: 0,
-    name: "Epley",
+    name: "epley",
     formula: EPLEY,
   },
   {
     id: 1,
     key: 1,
-    name: "Lombardi",
+    name: "lombardi",
     formula: LOMBARDI,
   },
 ];
@@ -45,9 +44,14 @@ function OneRepMaxForm({
 }: {
   setOneRepMax: React.Dispatch<React.SetStateAction<number>>;
 }) {
-  const [formula, setFormula] = React.useState("Epley");
+  const [formula, setFormula] = React.useState("epley");
   const onFinishFailed = (errorInfo: any) => {
     console.log("[Failed]:", errorInfo);
+  };
+
+  const handleSetFormula = (formula: string) => {
+    console.log("formula", formula);
+    setFormula(formula);
   };
 
   type FieldType = {
@@ -68,6 +72,7 @@ function OneRepMaxForm({
   const onFinish = ({ weight, reps }: { weight: number; reps: number }) => {
     const currentFormula = FORMULAS.find((f) => f.name === formula);
 
+    console.log("currentFormula", currentFormula);
     const oneRepMax = Math.round(
       calculateOneRepMax(weight, reps, currentFormula?.formula)
     );
@@ -116,7 +121,10 @@ function OneRepMaxForm({
         </Form.Item>
 
         {checked && (
-          <CompareFormulaDisplay formula={formula} setFormula={setFormula} />
+          <CompareFormulaDisplay
+            formula={formula}
+            setFormula={handleSetFormula}
+          />
         )}
 
         <Button

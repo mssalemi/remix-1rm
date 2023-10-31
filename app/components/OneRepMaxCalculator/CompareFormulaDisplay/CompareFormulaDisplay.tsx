@@ -28,7 +28,7 @@ type FieldType = {
 
 interface Props {
   formula: string;
-  setFormula: React.Dispatch<React.SetStateAction<string>>;
+  setFormula: (value: string) => void;
 }
 
 export function CompareFormulaDisplay({ formula, setFormula }: Props) {
