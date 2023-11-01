@@ -51,8 +51,8 @@ function Layout({ children }: { children: React.ReactNode }) {
     },
     {
       key: 2,
-      label: "Dashboard",
-      path: "/dashboard",
+      label: "Workouts",
+      path: "/workouts",
     },
   ];
 
