@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Typography, Form, Select, Table, Tag } from "antd";
 
-import { EPLEY, LOMBARDI } from "../../../utils/helpers";
+import { EPLEY, LOMBARDI, MOSHID } from "../../../utils/helpers";
 
 const FORMULAS_DATA = [
   {
@@ -15,6 +15,12 @@ const FORMULAS_DATA = [
     key: 1,
     name: "Lombardi",
     formula: LOMBARDI,
+  },
+  {
+    id: 2,
+    key: 2,
+    name: "Moshid",
+    formula: MOSHID,
   },
 ];
 
@@ -67,6 +73,14 @@ export function CompareFormulaDisplay({ formula, setFormula }: Props) {
         return <Tag color="blue">{value}</Tag>;
       },
     },
+    {
+      title: "Moshid",
+      dataIndex: "formulaMoshid",
+      key: "formula-moshid",
+      render: (value: number) => {
+        return <Tag color="green">{value}</Tag>;
+      },
+    },
   ];
 
   const rows = useMemo(() => {
@@ -76,6 +90,7 @@ export function CompareFormulaDisplay({ formula, setFormula }: Props) {
         reps: index + 1,
         formulaEpley: percentage,
         formulaLombardi: FORMULAS_DATA[1].formula[index],
+        formulaMoshid: FORMULAS_DATA[2].formula[index],
       };
     });
   }, [formula, compareSelected]);
@@ -97,6 +112,7 @@ export function CompareFormulaDisplay({ formula, setFormula }: Props) {
         <Select defaultValue={formula} onChange={handleFormulaSelected}>
           <Select.Option value="epley">Epley</Select.Option>
           <Select.Option value="lombardi">Lombardi</Select.Option>
+          <Select.Option value="moshid">Moshid</Select.Option>
         </Select>
         <Typography
           style={{

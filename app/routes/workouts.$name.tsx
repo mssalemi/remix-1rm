@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "@remix-run/react";
+
+import { WorkoutDisplay } from "../components/index";
 
 const WENDLER = {
   id: 1,
@@ -18,9 +20,19 @@ const WORKOUTS = [WENDLER, MEDSTRENGTH];
 export default function Workout() {
   const { name } = useParams();
 
-  const workout = WORKOUTS.find((workout) => workout.key === name);
+  useEffect(() => {
+    console.log("workout name:", name);
+  }, [name]);
 
-  const title = workout?.name;
+  const workoutNow = WORKOUTS.find((workout) => workout.key === name);
 
-  return <div>{title || `"${name}" NOT FOUND`}</div>;
+  return (
+    <div>
+      {workoutNow ? (
+        <WorkoutDisplay title={workoutNow.name} />
+      ) : (
+        `${name}" NOT FOUND`
+      )}
+    </div>
+  );
 }

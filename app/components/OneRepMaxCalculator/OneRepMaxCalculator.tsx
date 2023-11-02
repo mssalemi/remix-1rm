@@ -2,7 +2,12 @@ import React from "react";
 
 import { Typography, Button, Form, Input, Switch } from "antd";
 
-import { calculateOneRepMax, EPLEY, LOMBARDI } from "../../utils/helpers";
+import {
+  calculateOneRepMax,
+  EPLEY,
+  LOMBARDI,
+  MOSHID,
+} from "../../utils/helpers";
 import { CompareFormulaDisplay } from "./CompareFormulaDisplay";
 
 const { Title, Text } = Typography;
@@ -19,6 +24,12 @@ const FORMULAS = [
     key: 1,
     name: "lombardi",
     formula: LOMBARDI,
+  },
+  {
+    id: 2,
+    key: 2,
+    name: "moshid",
+    formula: MOSHID,
   },
 ];
 

@@ -1,14 +1,26 @@
 import React from "react";
 import { Link } from "@remix-run/react";
+import type { NavigateFunction } from "@remix-run/react";
 
-import { Col, Row, Typography, Card, Avatar, Space, List, Tag } from "antd";
+import {
+  Col,
+  Row,
+  Typography,
+  Card,
+  Avatar,
+  Space,
+  List,
+  Tag,
+  Button,
+} from "antd";
 
 import { UserOutlined } from "@ant-design/icons";
 
 const { Text, Title } = Typography;
 
 interface Props {
-  oneRepMax: number;
+  oneRepMax?: number;
+  navigate: NavigateFunction;
 }
 
 const TEXT =
@@ -24,7 +36,7 @@ const links = ["Wendler", "MedStrength"];
 //   </svg>
 // );
 
-export function TipsDisplay({}: Props) {
+export function TipsDisplay({ navigate }: Props) {
   return (
     <Card style={{ height: "100%" }}>
       <div
@@ -34,12 +46,14 @@ export function TipsDisplay({}: Props) {
           flexDirection: "column",
         }}
       >
-        <Col span={24}>
-          <Space wrap size={16}>
-            <Avatar size={"large"} icon={<UserOutlined />} />
-            <Title level={5}>{TITLE}</Title>
-          </Space>
-        </Col>
+        <Row>
+          <Col span={24}>
+            <Space wrap size={16}>
+              <Avatar size={"large"} icon={<UserOutlined />} />
+              <Title level={5}>{TITLE}</Title>
+            </Space>
+          </Col>
+        </Row>
       </div>
       <Row>
         <Col
@@ -59,9 +73,9 @@ export function TipsDisplay({}: Props) {
             dataSource={links}
             renderItem={(item) => (
               <List.Item>
-                <Link to={`/workouts/${item}`}>
+                <Button onClick={() => navigate(`/workouts/${item}`)}>
                   <Tag color="blue">{item}</Tag>
-                </Link>
+                </Button>
               </List.Item>
             )}
           />

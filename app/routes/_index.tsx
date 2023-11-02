@@ -10,6 +10,8 @@ import {
   OneRepMaxDisplay,
 } from "../components/";
 
+import { useNavigate } from "@remix-run/react";
+
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -19,6 +21,7 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   const [oneRepMax, setOneRepMax] = useState<number>(0);
+  const navigate = useNavigate();
 
   return (
     <div
@@ -59,7 +62,7 @@ export default function Index() {
               padding: "0.5rem",
             }}
           >
-            <TipsDisplay oneRepMax={oneRepMax} />
+            <TipsDisplay navigate={navigate} oneRepMax={oneRepMax} />
           </Col>
         </Row>
       </div>

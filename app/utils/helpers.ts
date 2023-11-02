@@ -13,6 +13,11 @@ export const EPLEY: number[] = [
   60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50,
 ];
 
+export const MOSHID: number[] = [
+  100, 95, 90, 87.5, 85, 84, 82, 80, 77, 75, 73, 70, 68, 67, 65, 64, 63, 62, 61,
+  60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50,
+];
+
 export function calculateOneRepMax(
   weight: number,
   reps: number,

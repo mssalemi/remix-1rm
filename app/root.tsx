@@ -8,9 +8,11 @@ import {
   Scripts,
   ScrollRestoration,
   useNavigate,
+  useLocation,
 } from "@remix-run/react";
 
 import { Layout as AntDLayout, Menu, theme, type MenuProps } from "antd";
+import { useEffect } from "react";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -33,6 +35,9 @@ export default function App() {
 
 function Layout({ children }: { children: React.ReactNode }) {
   let navigate = useNavigate();
+  useEffect(() => {
+    // console.log("I re-rendered");
+  }, []);
 
   const {
     token: { colorBgContainer },
@@ -46,11 +51,6 @@ function Layout({ children }: { children: React.ReactNode }) {
     },
     {
       key: 1,
-      label: "Exercises",
-      path: "/exercises",
-    },
-    {
-      key: 2,
       label: "Workouts",
       path: "/workouts",
     },

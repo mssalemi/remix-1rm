@@ -1,0 +1,1 @@
+export { WorkoutDisplay } from "./Workout";
