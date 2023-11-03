@@ -73,8 +73,15 @@ export function TipsDisplay({ navigate }: Props) {
             dataSource={links}
             renderItem={(item) => (
               <List.Item>
-                <Button onClick={() => navigate(`/workouts/${item}`)}>
-                  <Tag color="blue">{item}</Tag>
+                <Button
+                  style={{
+                    width: "50%",
+                  }}
+                  type="primary"
+                  size={"small"}
+                  onClick={() => navigate(`/workouts/${item}`)}
+                >
+                  {item}
                 </Button>
               </List.Item>
             )}

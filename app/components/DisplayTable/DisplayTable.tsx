@@ -8,14 +8,6 @@ interface TableItem {
   percentage: number;
 }
 
-const repMaxTableItems: TableItem[] = STANDARD.map((item, index) => {
-  return {
-    key: `${index}repMax`,
-    reps: index + 1,
-    percentage: item,
-  };
-});
-
 const repsMaxColumns = [
   {
     title: "Reps",
@@ -42,7 +34,21 @@ const repsMaxColumns = [
   },
 ];
 
-export function DisplayTable({ oneRepMax }: { oneRepMax: number }) {
+export function DisplayTable({
+  oneRepMax,
+  percentages,
+}: {
+  oneRepMax: number;
+  percentages: number[];
+}) {
+  const repMaxTableItems: TableItem[] = percentages.map((item, index) => {
+    return {
+      key: `${index}repMax`,
+      reps: index + 1,
+      percentage: item,
+    };
+  });
+
   const list = useMemo(() => {
     if (oneRepMax === 0) {
       return repMaxTableItems;

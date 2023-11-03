@@ -38,24 +38,35 @@ const DESC =
 
 export function OneRepMaxCalculator({
   setOneRepMax,
+  formula,
+  setFormula,
 }: {
   setOneRepMax: React.Dispatch<React.SetStateAction<number>>;
+  formula: string;
+  setFormula: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <div>
       <Title>One Rep Max Calculator</Title>
       <Text type="secondary">{DESC}</Text>
-      <OneRepMaxForm setOneRepMax={setOneRepMax} />
+      <OneRepMaxForm
+        setOneRepMax={setOneRepMax}
+        formula={formula}
+        setFormula={setFormula}
+      />
     </div>
   );
 }
 
 function OneRepMaxForm({
   setOneRepMax,
+  formula,
+  setFormula,
 }: {
   setOneRepMax: React.Dispatch<React.SetStateAction<number>>;
+  formula: string;
+  setFormula: React.Dispatch<React.SetStateAction<string>>;
 }) {
-  const [formula, setFormula] = React.useState("epley");
   const onFinishFailed = (errorInfo: any) => {
     console.log("[Failed]:", errorInfo);
   };
@@ -127,7 +138,7 @@ function OneRepMaxForm({
           <Input />
         </Form.Item>
 
-        <Form.Item label="Customize RepMax Engine" valuePropName="checked">
+        <Form.Item label="Customize" valuePropName="checked">
           <Switch checked={checked} onChange={handleCustomize} />
         </Form.Item>
 
