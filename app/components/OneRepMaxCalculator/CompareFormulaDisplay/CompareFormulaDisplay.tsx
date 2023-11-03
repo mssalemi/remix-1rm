@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Typography, Form, Select, Table, Tag } from "antd";
+import { Typography, Form, Select, Table, Tag, Col, Row } from "antd";
 
 import { EPLEY, LOMBARDI, MOSHID } from "../../../utils/helpers";
 
@@ -62,7 +62,7 @@ export function CompareFormulaDisplay({ formula, setFormula }: Props) {
       dataIndex: "formulaEpley",
       key: "formula-epley",
       render: (value: number) => {
-        return <Tag color="magenta">{value}</Tag>;
+        return <Tag color="magenta">{value}%</Tag>;
       },
     },
     {
@@ -70,7 +70,7 @@ export function CompareFormulaDisplay({ formula, setFormula }: Props) {
       dataIndex: "formulaLombardi",
       key: "formula-lombardi",
       render: (value: number) => {
-        return <Tag color="blue">{value}</Tag>;
+        return <Tag color="blue">{value}%</Tag>;
       },
     },
     {
@@ -78,7 +78,7 @@ export function CompareFormulaDisplay({ formula, setFormula }: Props) {
       dataIndex: "formulaMoshid",
       key: "formula-moshid",
       render: (value: number) => {
-        return <Tag color="green">{value}</Tag>;
+        return <Tag color="green">{value}%</Tag>;
       },
     },
   ];
@@ -96,12 +96,7 @@ export function CompareFormulaDisplay({ formula, setFormula }: Props) {
   }, [formula, compareSelected]);
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-      }}
-    >
+    <div style={{}}>
       <Form.Item<FieldType>
         label="Formula"
         name="formula"
@@ -109,23 +104,41 @@ export function CompareFormulaDisplay({ formula, setFormula }: Props) {
           marginRight: "1rem",
         }}
       >
-        <Select defaultValue={formula} onChange={handleFormulaSelected}>
-          <Select.Option value="epley">Epley</Select.Option>
-          <Select.Option value="lombardi">Lombardi</Select.Option>
-          <Select.Option value="moshid">Moshid</Select.Option>
-        </Select>
-        <Typography
+        <Row
           style={{
-            marginTop: "1rem",
-            marginRight: "1rem",
+            justifyContent: "space-between",
           }}
         >
-          <Text type="secondary">
-            The standard formula is the most accurate for most people. It is
-            based on the Epley formula, but modified to make it easier to use
-            for multiple reps.
-          </Text>
-        </Typography>
+          <Col xs={24} sm={24} md={24} lg={12}>
+            <Select defaultValue={formula} onChange={handleFormulaSelected}>
+              <Select.Option value="epley">Epley</Select.Option>
+              <Select.Option value="lombardi">Lombardi</Select.Option>
+              <Select.Option value="moshid">Moshid</Select.Option>
+            </Select>
+          </Col>
+          <Col
+            xs={24}
+            sm={24}
+            md={24}
+            lg={12}
+            style={{
+              padding: "0.5rem",
+            }}
+          >
+            <Typography
+              style={{
+                marginTop: "1rem",
+                marginRight: "1rem",
+              }}
+            >
+              <Text type="secondary">
+                The standard formula is the most accurate for most people. It is
+                based on the Epley formula, but modified to make it easier to
+                use for multiple reps.
+              </Text>
+            </Typography>
+          </Col>
+        </Row>
       </Form.Item>
       <Table
         columns={columns}
