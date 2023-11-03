@@ -1,6 +1,8 @@
 import React from "react";
 
-import { Card, List } from "antd";
+import { Card, List, Col, Row, Avatar } from "antd";
+
+import { EyeOutlined } from "@ant-design/icons";
 
 interface DailyWorkout {
   title?: string;
@@ -16,6 +18,7 @@ interface DailyWorkout {
 
 interface Props {
   dailyWorkout?: DailyWorkout;
+  oneRepMax?: number;
 }
 
 const oneRepMax = 100;
@@ -60,41 +63,42 @@ const MOCK_DAILY_WORKOUT: DailyWorkout = {
 
 export function DailyWorkoutDisplay({
   dailyWorkout = MOCK_DAILY_WORKOUT,
+  oneRepMax = 0,
 }: Props) {
   console.log("dailyWorkout:", dailyWorkout);
   return (
     <>
-      <Card
-        style={{
-          width: "20rem",
-          height: "20rem",
-        }}
-        title={"Day 1"}
-      >
-        <List
-          dataSource={dailyWorkout.exercises}
-          renderItem={(item) => (
-            <List.Item>
-              <List.Item.Meta
-                style={{
-                  alignSelf: "start",
-                }}
-                title={item.name}
-              />
-              <List
-                dataSource={item.uniqueSets}
-                renderItem={(item) => (
-                  <List.Item>
-                    {`${item.repeats ? `${item.repeats}x` : "1x"}${
-                      item.reps
-                    } @ ${item.weight} lbs`}
-                  </List.Item>
-                )}
-              />
-            </List.Item>
-          )}
-        />
-      </Card>
+      <Row>
+        <Col sm={24} md={12} lg={8}>
+          <Card style={{}} title={dailyWorkout.title}>
+            <List
+              dataSource={dailyWorkout.exercises}
+              renderItem={(item) => (
+                <List.Item>
+                  <List.Item.Meta
+                    style={{
+                      alignSelf: "start",
+                    }}
+                    title={item.name}
+                    // avatar={<EyeOutlined />}
+                  />
+
+                  <List
+                    dataSource={item.uniqueSets}
+                    renderItem={(item) => (
+                      <List.Item title={"Bench Press"}>
+                        {`${item.repeats ? `${item.repeats}x` : "1x"}${
+                          item.reps
+                        } @ ${item.weight} ${oneRepMax === 0 ? "%" : "lbs"}`}
+                      </List.Item>
+                    )}
+                  />
+                </List.Item>
+              )}
+            />
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 }

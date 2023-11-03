@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 
 import type { MetaFunction } from "@remix-run/node";
 import { Row, Col } from "antd";
