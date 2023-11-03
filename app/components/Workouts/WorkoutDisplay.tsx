@@ -1,8 +1,6 @@
 import React from "react";
 
-import { Card, List, Col, Row, Avatar } from "antd";
-
-import { EyeOutlined } from "@ant-design/icons";
+import { Card, List, Col, Row } from "antd";
 
 interface DailyWorkout {
   title?: string;
@@ -41,11 +39,6 @@ const MOCK_DAILY_WORKOUT: DailyWorkout = {
           reps: 5,
           weight: oneRepMax * 0.85,
         },
-        {
-          reps: 10,
-          weight: oneRepMax * 0.45,
-          repeats: 5,
-        },
       ],
     },
     {
@@ -70,8 +63,9 @@ export function DailyWorkoutDisplay({
     <>
       <Row>
         <Col sm={24} md={12} lg={8}>
-          <Card style={{}} title={dailyWorkout.title}>
+          <Card style={{}}>
             <List
+              size="small"
               dataSource={dailyWorkout.exercises}
               renderItem={(item) => (
                 <List.Item>
@@ -84,6 +78,7 @@ export function DailyWorkoutDisplay({
                   />
 
                   <List
+                    size="small"
                     dataSource={item.uniqueSets}
                     renderItem={(item) => (
                       <List.Item title={"Bench Press"}>

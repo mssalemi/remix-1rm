@@ -72,7 +72,6 @@ function OneRepMaxForm({
   };
 
   const handleSetFormula = (formula: string) => {
-    console.log("formula", formula);
     setFormula(formula);
   };
 

@@ -12,7 +12,7 @@ import {
 } from "@remix-run/react";
 
 import { Layout as AntDLayout, Menu, theme, type MenuProps } from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -39,26 +39,37 @@ function Layout({ children }: { children: React.ReactNode }) {
     // console.log("I re-rendered");
   }, []);
 
+  const location = useLocation();
+  const [current, setCurrent] = useState("oneRepMax");
+
+  useEffect(() => {
+    if (location.pathname.includes("workouts")) {
+      setCurrent("workouts");
+    } else {
+      setCurrent("oneRepMax");
+    }
+  }, [location]);
+
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
   const items = [
     {
-      key: 0,
+      key: "oneRepMax",
       label: "One Rep Max",
       path: "/",
     },
     {
-      key: 1,
+      key: "workouts",
       label: "Workouts",
       path: "/workouts",
     },
   ];
 
   const handleNavClick: MenuProps["onClick"] = (e) => {
-    const index = parseInt(e.key);
-    navigate(items[index].path);
+    const newSelected = items.find((item) => item.key === e.key);
+    navigate(newSelected?.path || "/");
   };
 
   return (
@@ -83,7 +94,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             <Menu
               theme="dark"
               mode="horizontal"
-              defaultSelectedKeys={["0"]}
+              selectedKeys={[current]}
               items={items}
               onClick={handleNavClick}
               disabledOverflow={true}

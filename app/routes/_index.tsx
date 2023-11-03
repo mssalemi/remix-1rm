@@ -48,8 +48,6 @@ export default function Index() {
   const [formula, setFormula] = useState("Epley");
 
   const percentages = useMemo(() => {
-    console.log("formula", formula);
-
     return FORMULAS_DATA.find((f) => f.name === formula)?.formula || EPLEY;
   }, [formula]);
 
