@@ -1,5 +1,7 @@
 import React from "react";
 
+import { useLocation } from "@remix-run/react";
+
 import { Typography, Button, Form, Input, Switch } from "antd";
 
 import {
@@ -100,6 +102,8 @@ function OneRepMaxForm({
     setOneRepMax(oneRepMax);
   };
 
+  const location = useLocation();
+
   return (
     <div
       style={{
@@ -107,6 +111,7 @@ function OneRepMaxForm({
       }}
     >
       <Form
+        key={location.key}
         name="basic"
         initialValues={{ remember: true }}
         onFinish={onFinish}

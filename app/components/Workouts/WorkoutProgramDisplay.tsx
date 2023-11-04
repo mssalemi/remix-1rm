@@ -1,16 +1,6 @@
 import React from "react";
 
-// import {
-//   Typography,
-//   Col,
-//   Row,
-//   Skeleton,
-//   InputNumber,
-//   Button,
-//   Space,
-// } from "antd";
-
-import { DailyWorkoutDisplay } from "./WorkoutDisplay";
+import { WeeklyWorkoutDisplay } from "./WorkoutDisplay";
 
 interface WorkoutProgram {
   title: string;
@@ -26,7 +16,7 @@ export function WorkoutProgramDisplay({ title }: Props) {
     <div>
       {title ? (
         <>
-          <DailyWorkoutDisplay />
+          <WeeklyWorkoutDisplay />
         </>
       ) : (
         <></>

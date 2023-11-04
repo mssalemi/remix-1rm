@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 import type { MetaFunction } from "@remix-run/node";
 import { Row, Col } from "antd";
@@ -46,6 +46,17 @@ export default function Index() {
   const navigate = useNavigate();
 
   const [formula, setFormula] = useState("Epley");
+
+  useEffect(() => {
+    const oneRepMax = localStorage.getItem("oneRepMax");
+    if (oneRepMax) {
+      setOneRepMax(Number(oneRepMax));
+    }
+  });
+
+  useEffect(() => {
+    console.log(localStorage);
+  }, []);
 
   const percentages = useMemo(() => {
     return FORMULAS_DATA.find((f) => f.name === formula)?.formula || EPLEY;
