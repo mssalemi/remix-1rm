@@ -1,29 +1,4 @@
-interface Set {
-  id: number;
-  exercise: string;
-  reps: number;
-  weight: number; // Weight calculated as oneRepMax * percentage
-  completed: boolean;
-}
-
-interface Workout {
-  id: number;
-  day: string;
-  sets: Set[];
-}
-
-interface WeeklyWorkout {
-  id: number;
-  week: number;
-  workouts: Workout[];
-}
-
-interface WorkoutProgram {
-  id: number;
-  title: string;
-  oneRepMax: number;
-  weeklyWorkouts: WeeklyWorkout[];
-}
+import type { WorkoutProgram } from "../types/types";
 
 // Define the sample Wendler 5/3/1 program with a oneRepMax of 100 and percentage values
 export const wendler531: WorkoutProgram = {
