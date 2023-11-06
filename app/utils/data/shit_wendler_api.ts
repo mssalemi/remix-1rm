@@ -139,14 +139,39 @@ export function weeklyWendlerWorkout({
   bench: number;
   squat: number;
   deadlift: number;
-}) {
+}): WeeklyWorkout {
   return {
     id: 1,
-    title: "Wendler 5/3/1",
+    title: "Week 1",
     days: [
       WENDLER_DAILY_WORKOUT__BENCH(bench),
       WENDLER_DAILY_WORKOUT_SQUAT(squat),
       WENDLER_DAILY_WORKOUT_DEADLIFT(deadlift),
     ],
+  };
+}
+
+interface WendlerWorkoutProgramCreate {
+  oneRepMax: OneRepMax;
+  title: string;
+  totalWeeks: number;
+}
+
+export function wendler531WorkoutProgram({
+  oneRepMax,
+  title = "Wendler 5/3/1",
+  totalWeeks = 4,
+}: WendlerWorkoutProgramCreate): WorkoutProgram {
+  // const { bench, squat, deadlift } = oneRepMax;
+  const weeklyWorkouts: WeeklyWorkout[] = [
+    weeklyWendlerWorkout(oneRepMax),
+    weeklyWendlerWorkout(oneRepMax),
+  ];
+
+  return {
+    id: 1234,
+    title,
+    oneRepMax,
+    weeklyWorkouts,
   };
 }

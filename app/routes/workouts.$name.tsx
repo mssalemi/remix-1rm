@@ -3,6 +3,8 @@ import { useParams } from "@remix-run/react";
 
 import { WorkoutDisplay } from "../components/index";
 
+import { wendler531WorkoutProgram } from "app/utils/data/shit_wendler_api";
+
 const WENDLER = {
   id: 1,
   key: "Wendler",
@@ -26,13 +28,19 @@ export default function Workout() {
 
   const workoutNow = WORKOUTS.find((workout) => workout.key === name);
 
+  const program = wendler531WorkoutProgram({
+    oneRepMax: {
+      squat: 100,
+      bench: 100,
+      deadlift: 100,
+    },
+    title: "Wendler 5/3/1",
+    totalWeeks: 4,
+  });
+
   return (
     <div>
-      {workoutNow ? (
-        <WorkoutDisplay title={workoutNow.name} />
-      ) : (
-        `${name}" NOT FOUND`
-      )}
+      {workoutNow ? <WorkoutDisplay program={program} /> : `${name}" NOT FOUND`}
     </div>
   );
 }

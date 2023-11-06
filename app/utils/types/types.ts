@@ -22,10 +22,12 @@ export interface WeeklyWorkout {
 export interface WorkoutProgram {
   id: number;
   title: string;
-  oneRepMax: number;
+  oneRepMax: OneRepMax;
   weeklyWorkouts: WeeklyWorkout[];
 }
 
 export interface OneRepMax {
-  [key: string]: number;
+  bench: number;
+  squat: number;
+  deadlift: number;
 }

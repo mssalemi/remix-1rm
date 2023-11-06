@@ -3,13 +3,15 @@ import React, { useState } from "react";
 import { WorkoutProgramDisplay } from "./WorkoutProgramDisplay";
 
 import { Typography, Col, Row, Form, InputNumber, Button, Space } from "antd";
+import { WorkoutProgram } from "~/utils/types/types";
 
 const { Title } = Typography;
 
 interface Props {
-  title: string;
+  program: WorkoutProgram;
 }
 
+// TODO: Create a object with one rep max values
 const compoundExercises = [
   {
     name: "Bench Press",
@@ -35,7 +37,7 @@ const compoundExercises = [
 
 type SizeType = Parameters<typeof Form>[0]["size"];
 
-export function WorkoutDisplay({ title }: Props) {
+export function WorkoutDisplay({ program }: Props) {
   const [componentSize, setComponentSize] = useState<SizeType | "default">(
     "default"
   );
@@ -65,7 +67,7 @@ export function WorkoutDisplay({ title }: Props) {
         }}
       >
         <Col span={24}>
-          <Title keyboard>{title}</Title>
+          <Title keyboard>{program.title}</Title>
         </Col>
       </Row>
       <Row
@@ -100,7 +102,7 @@ export function WorkoutDisplay({ title }: Props) {
           </Form>
         </Col>
         <Col span={24}>
-          <WorkoutProgramDisplay title={"Wendler 5/3/1"} />
+          <WorkoutProgramDisplay workoutProgram={program} />
         </Col>
       </Row>
     </div>

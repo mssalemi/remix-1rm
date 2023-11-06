@@ -2,33 +2,27 @@ import React from "react";
 
 import { WeeklyWorkoutDisplay } from "./WorkoutDisplay";
 
-import { weeklyWendlerWorkout } from "../../utils/data/shit_wendler_api";
-
-interface WorkoutProgram {
-  title: string;
-}
-
+import type { WorkoutProgram } from "app/utils/types/types";
 interface Props {
-  title: string;
-  workoutProgram?: WorkoutProgram;
+  workoutProgram: WorkoutProgram;
 }
 
-export function WorkoutProgramDisplay({ title }: Props) {
-  const weeklyWorkouts = weeklyWendlerWorkout({
-    squat: 100,
-    bench: 100,
-    deadlift: 100,
-  });
-
+export function WorkoutProgramDisplay({ workoutProgram }: Props) {
   return (
     <div>
-      {title ? (
+      {
         <>
-          <WeeklyWorkoutDisplay days={weeklyWorkouts.days} />
+          {workoutProgram.weeklyWorkouts.map((workoutWeek, index) => {
+            return (
+              <WeeklyWorkoutDisplay
+                key={index}
+                days={workoutWeek.days}
+                title={workoutWeek.title}
+              />
+            );
+          })}
         </>
-      ) : (
-        <></>
-      )}
+      }
     </div>
   );
 }
