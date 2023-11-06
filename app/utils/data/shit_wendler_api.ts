@@ -1,4 +1,4 @@
-import {
+import type {
   Exercise,
   DailyWorkout,
   WeeklyWorkout,
@@ -163,15 +163,160 @@ export function wendler531WorkoutProgram({
   totalWeeks = 4,
 }: WendlerWorkoutProgramCreate): WorkoutProgram {
   // const { bench, squat, deadlift } = oneRepMax;
-  const weeklyWorkouts: WeeklyWorkout[] = [
-    weeklyWendlerWorkout(oneRepMax),
-    weeklyWendlerWorkout(oneRepMax),
-  ];
+  const weeklyWorkouts: WeeklyWorkout[] = [1, 2, 3, 4].map((weekNum) => {
+    return createWendlerWorkoutWeek(oneRepMax, weekNum);
+  });
 
   return {
-    id: 1234,
+    id: 1,
     title,
     oneRepMax,
     weeklyWorkouts,
+  };
+}
+
+// This creates a wendler 5/3/1 program, mainly for testing
+// This is a crap function, stupidly annoying...
+function createWendlerWorkoutWeek(
+  oneRepMax: OneRepMax,
+  weekNum: number
+): WeeklyWorkout {
+  const { bench, squat, deadlift } = oneRepMax;
+
+  let repPercentages: number[] = [];
+  let reps: number[] = [];
+
+  switch (weekNum) {
+    case 1:
+      reps = [5, 5, 5];
+      repPercentages = [0.65, 0.75, 0.85];
+      break;
+    case 2:
+      reps = [3, 3, 3];
+      repPercentages = [0.7, 0.8, 0.9];
+      break;
+    case 3:
+      reps = [5, 3, 1];
+      repPercentages = [0.75, 0.85, 0.95];
+      break;
+    case 4:
+      reps = [5, 5, 5];
+      repPercentages = [0.4, 0.5, 0.6];
+      break;
+  }
+
+  const benchSets = reps.map((rep, index) => {
+    return {
+      reps: rep,
+      weight: bench * repPercentages[index],
+    };
+  });
+
+  const benchExercise: Exercise = {
+    id: "bench",
+    name: "Bench Press",
+    uniqueSets: benchSets,
+  };
+
+  const benchAccessorySets = reps.map((rep, index) => {
+    return {
+      reps: rep,
+      weight: bench * repPercentages[index],
+    };
+  });
+
+  const benchAccessoryExercise: Exercise = {
+    id: "bench-accessory",
+    name: "Bench Press (Accessory)",
+    uniqueSets: benchAccessorySets,
+  };
+
+  const benchTricepSets = reps.map((rep, index) => {
+    return {
+      reps: rep,
+      weight: bench * repPercentages[index],
+    };
+  });
+
+  const benchTricepExercise: Exercise = {
+    id: "bench-tricep",
+    name: "Tricep Extension",
+    uniqueSets: benchTricepSets,
+  };
+
+  const benchAbsSets = reps.map((rep, index) => {
+    return {
+      reps: rep,
+      weight: bench * repPercentages[index],
+    };
+  });
+
+  const benchAbsExercise: Exercise = {
+    id: "bench-abs",
+    name: "Abs",
+    uniqueSets: benchAbsSets,
+  };
+
+  const squatSets = reps.map((rep, index) => {
+    return {
+      reps: rep,
+      weight: squat * repPercentages[index],
+    };
+  });
+
+  const squatExercise: Exercise = {
+    id: "squat",
+    name: "Squat",
+    uniqueSets: squatSets,
+  };
+
+  const squatAccessorySets = reps.map((rep, index) => {
+    return {
+      reps: rep,
+      weight: squat * repPercentages[index],
+    };
+  });
+
+  const squatAccessoryExercise: Exercise = {
+    id: "squat-accessory",
+    name: "Squat (Accessory)",
+    uniqueSets: squatAccessorySets,
+  };
+
+  const deadliftSets = reps.map((rep, index) => {
+    return {
+      reps: rep,
+      weight: deadlift * repPercentages[index],
+    };
+  });
+
+  return {
+    id: 1,
+    title: `Week ${weekNum}`,
+    days: [
+      {
+        title: "Day 1",
+        exercises: [
+          benchExercise,
+          benchAccessoryExercise,
+          benchTricepExercise,
+          benchAbsExercise,
+        ],
+      },
+      {
+        title: "Day 2",
+        exercises: [squatExercise, squatAccessoryExercise],
+      },
+      {
+        title: "Day 3",
+        exercises: [
+          {
+            id: "deadlift",
+            name: "Deadlift",
+            uniqueSets: deadliftSets,
+          },
+        ],
+      },
+    ],
   };
 }
