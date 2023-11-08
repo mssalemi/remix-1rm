@@ -186,6 +186,8 @@ function createWendlerWorkoutWeek(
   let repPercentages: number[] = [];
   let reps: number[] = [];
 
+  console.log(bench, squat, deadlift);
+
   switch (weekNum) {
     case 1:
       reps = [5, 5, 5];
@@ -227,34 +229,32 @@ function createWendlerWorkoutWeek(
 
   const benchAccessoryExercise: Exercise = {
     id: "bench-accessory",
-    name: "Bench Press (Accessory)",
+    name: "Bench Press",
     uniqueSets: benchAccessorySets,
   };
 
-  const benchTricepSets = reps.map((rep, index) => {
-    return {
-      reps: rep,
-      weight: bench * repPercentages[index],
-    };
-  });
+  const benchTricepSets = {
+    reps: 10,
+    weight: 0,
+    repeat: 3,
+  };
 
   const benchTricepExercise: Exercise = {
     id: "bench-tricep",
     name: "Tricep Extension",
-    uniqueSets: benchTricepSets,
+    uniqueSets: [benchTricepSets],
   };
 
-  const benchAbsSets = reps.map((rep, index) => {
-    return {
-      reps: rep,
-      weight: bench * repPercentages[index],
-    };
-  });
+  const benchAbsSets = {
+    reps: 15,
+    weight: 0,
+    repeat: 4,
+  };
 
   const benchAbsExercise: Exercise = {
     id: "bench-abs",
     name: "Abs",
-    uniqueSets: benchAbsSets,
+    uniqueSets: [benchAbsSets],
   };
 
   const squatSets = reps.map((rep, index) => {
@@ -279,7 +279,7 @@ function createWendlerWorkoutWeek(
 
   const squatAccessoryExercise: Exercise = {
     id: "squat-accessory",
-    name: "Squat (Accessory)",
+    name: "Squat",
     uniqueSets: squatAccessorySets,
   };
 

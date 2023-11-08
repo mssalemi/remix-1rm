@@ -12,21 +12,17 @@ interface Props {
 }
 
 export function WeeklyWorkoutDisplay({ days, title }: Props) {
-  console.log("dailyWorkout:", days);
-
   return (
     <>
-      <Card title={title} size="small">
+      <Card type="inner" title={title} size="small" style={{}}>
         <Row gutter={[12, 12]}>
           {days.map((dailyWorkout: DailyWorkout) => {
             return (
-              <Col key={dailyWorkout.title} xs={24} sm={12} md={8}>
-                <Card
+              <Col key={dailyWorkout.title} xs={24} sm={12} md={6}>
+                <div
                   style={{
-                    border: "1px solid #d9d9d9",
                     height: "100%",
                   }}
-                  type="inner"
                 >
                   <div>
                     <Text
@@ -43,13 +39,16 @@ export function WeeklyWorkoutDisplay({ days, title }: Props) {
                     size="small"
                     dataSource={dailyWorkout.exercises}
                     renderItem={(item) => (
-                      <Row>
+                      <Row
+                        style={{
+                          borderBottom: "1px solid #001628",
+                        }}
+                      >
                         <Col span={12}>
                           <Text
                             style={{
-                              fontSize: "10px",
+                              fontSize: "12px",
                             }}
-                            keyboard
                           >
                             {item.name}
                           </Text>
@@ -58,14 +57,12 @@ export function WeeklyWorkoutDisplay({ days, title }: Props) {
                           span={12}
                           style={{
                             textAlign: "right",
-                            borderBottom: "1px solid #d9d9d9",
                           }}
                         >
                           <Text
                             style={{
-                              fontSize: "8px",
+                              fontSize: "12px",
                             }}
-                            type="secondary"
                           >
                             {
                               <>
@@ -80,7 +77,11 @@ export function WeeklyWorkoutDisplay({ days, title }: Props) {
                                     >
                                       {`${
                                         set.repeat ? `${set.repeat}x` : "1x"
-                                      }${set.reps} @ ${set.weight}lbs`}
+                                      }${set.reps}${
+                                        set.weight === 0
+                                          ? ""
+                                          : ` @ ${Math.round(set.weight)}lbs`
+                                      }`}
                                       <br />
                                     </span>
                                   );
@@ -92,7 +93,7 @@ export function WeeklyWorkoutDisplay({ days, title }: Props) {
                       </Row>
                     )}
                   />
-                </Card>
+                </div>
               </Col>
             );
           })}

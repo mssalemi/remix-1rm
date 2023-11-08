@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams } from "@remix-run/react";
 
 import { WorkoutDisplay } from "../components/index";
@@ -12,19 +12,31 @@ export default function Workout() {
     console.log("workout name:", name);
   }, [name]);
 
-  const program = wendler531WorkoutProgram({
-    oneRepMax: {
-      squat: 100,
-      bench: 100,
-      deadlift: 100,
-    },
-    title: "Wendler 5/3/1",
-    totalWeeks: 4,
+  const [data, setData] = useState<{
+    squat: number;
+    bench: number;
+    deadlift: number;
+  }>({
+    squat: 0,
+    bench: 0,
+    deadlift: 0,
   });
+
+  const program = useMemo(() => {
+    return wendler531WorkoutProgram({
+      oneRepMax: data,
+      title: "Wendler 5/3/1",
+      totalWeeks: 4,
+    });
+  }, [data]);
 
   return (
     <div>
-      {program ? <WorkoutDisplay program={program} /> : `${name}" NOT FOUND`}
+      {program ? (
+        <WorkoutDisplay program={program} setOneRepMax={setData} />
+      ) : (
+        `${name}" NOT FOUND`
+      )}
     </div>
   );
 }

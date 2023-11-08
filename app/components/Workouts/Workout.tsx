@@ -1,64 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { WorkoutProgramDisplay } from "./WorkoutProgramDisplay";
 
-import { Typography, Col, Row, Form, InputNumber, Button, Space } from "antd";
-import { WorkoutProgram } from "~/utils/types/types";
+import { Typography, Col, Row } from "antd";
+import type { WorkoutProgram } from "~/utils/types/types";
 
 const { Title } = Typography;
 
 interface Props {
   program: WorkoutProgram;
+  setOneRepMax: React.Dispatch<
+    React.SetStateAction<{
+      squat: number;
+      bench: number;
+      deadlift: number;
+    }>
+  >;
 }
 
-// TODO: Create a object with one rep max values
-const compoundExercises = [
-  {
-    name: "Bench Press",
-    altName: "BP",
-    key: "benchPress",
-  },
-  {
-    name: "Squat",
-    altName: "SQ",
-    key: "squat",
-  },
-  {
-    name: "Deadlift",
-    altName: "DL",
-    key: "deadlift",
-  },
-  {
-    name: "Overhead Press",
-    altName: "OHP",
-    key: "overheadPress",
-  },
-];
-
-type SizeType = Parameters<typeof Form>[0]["size"];
-
-export function WorkoutDisplay({ program }: Props) {
-  const [componentSize, setComponentSize] = useState<SizeType | "default">(
-    "default"
-  );
-
-  const [data, setData] = useState<{
-    [key: string]: number;
-  }>(null);
-
-  const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-    setComponentSize(size);
-  };
-
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
-
-  const handleSubmit = (values: any) => {
-    console.log(values);
-    setData(values);
-  };
-
+export function WorkoutDisplay({ program, setOneRepMax }: Props) {
   return (
     <div>
       <Row
@@ -77,32 +37,10 @@ export function WorkoutDisplay({ program }: Props) {
         dir="row"
       >
         <Col span={24}>
-          <Form
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
-            initialValues={{ size: componentSize }}
-            onValuesChange={onFormLayoutChange}
-            size={componentSize as SizeType}
-            style={{ maxWidth: 600 }}
-            onFinish={handleSubmit}
-          >
-            <Space.Compact>
-              {compoundExercises.map(({ key, name, altName }, index) => (
-                <Form.Item key={key} name={key}>
-                  {/* <Tag color="#2db7f5">{name}</Tag> */}
-                  <InputNumber placeholder={altName} size="middle" />
-                </Form.Item>
-              ))}
-            </Space.Compact>
-
-            <Button type="primary" htmlType="submit">
-              Generate Workout Program
-            </Button>
-          </Form>
-        </Col>
-        <Col span={24}>
-          <WorkoutProgramDisplay workoutProgram={program} />
+          <WorkoutProgramDisplay
+            workoutProgram={program}
+            setOneRepMax={setOneRepMax}
+          />
         </Col>
       </Row>
     </div>
