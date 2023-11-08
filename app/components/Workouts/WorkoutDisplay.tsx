@@ -75,13 +75,10 @@ export function WeeklyWorkoutDisplay({ days, title }: Props) {
                                         margin: 0,
                                       }}
                                     >
-                                      {`${
-                                        set.repeat ? `${set.repeat}x` : "1x"
-                                      }${set.reps}${
-                                        set.weight === 0
-                                          ? ""
-                                          : ` @ ${Math.round(set.weight)}lbs`
-                                      }`}
+                                      {set.repeat}x{set.reps}
+                                      {set.weight && set.weight > 0
+                                        ? ` @ ${Math.round(set.weight)} lbs`
+                                        : ""}
                                       <br />
                                     </span>
                                   );

@@ -17,14 +17,17 @@ export function WENDLER_DAILY_WORKOUT__BENCH(oneRepMax: number): DailyWorkout {
           {
             reps: 5,
             weight: oneRepMax * 0.65,
+            repeat: 1,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.75,
+            repeat: 1,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.85,
+            repeat: 1,
           },
         ],
       },
@@ -76,14 +79,17 @@ export function WENDLER_DAILY_WORKOUT_SQUAT(oneRepMax: number): DailyWorkout {
           {
             reps: 5,
             weight: oneRepMax * 0.65,
+            repeat: 1,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.75,
+            repeat: 1,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.85,
+            repeat: 1,
           },
         ],
       },
@@ -115,14 +121,17 @@ export function WENDLER_DAILY_WORKOUT_DEADLIFT(
           {
             reps: 5,
             weight: oneRepMax * 0.65,
+            repeat: 1,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.75,
+            repeat: 1,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.85,
+            repeat: 1,
           },
         ],
       },
@@ -211,6 +220,7 @@ function createWendlerWorkoutWeek(
     return {
       reps: rep,
       weight: bench * repPercentages[index],
+      repeat: 1,
     };
   });
 
@@ -224,6 +234,7 @@ function createWendlerWorkoutWeek(
     return {
       reps: rep,
       weight: bench * repPercentages[index],
+      repeat: 2,
     };
   });
 
@@ -261,6 +272,7 @@ function createWendlerWorkoutWeek(
     return {
       reps: rep,
       weight: squat * repPercentages[index],
+      repeat: 1,
     };
   });
 
@@ -274,6 +286,7 @@ function createWendlerWorkoutWeek(
     return {
       reps: rep,
       weight: squat * repPercentages[index],
+      repeat: 2,
     };
   });
 
@@ -287,6 +300,7 @@ function createWendlerWorkoutWeek(
     return {
       reps: rep,
       weight: deadlift * repPercentages[index],
+      repeat: 1,
     };
   });
 

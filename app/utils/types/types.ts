@@ -4,7 +4,7 @@ export interface Exercise {
   uniqueSets: {
     reps: number;
     weight: number;
-    repeat?: number;
+    repeat: number;
   }[];
 }
 
