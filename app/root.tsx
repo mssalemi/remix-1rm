@@ -11,14 +11,20 @@ import {
   useLocation,
 } from "@remix-run/react";
 
-import { Layout as AntDLayout, Menu, theme, type MenuProps } from "antd";
+import {
+  Layout as AntDLayout,
+  Menu,
+  theme,
+  type MenuProps,
+  ConfigProvider,
+} from "antd";
 import { useEffect, useState } from "react";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
-const { Content, Header } = AntDLayout;
+const { Content } = AntDLayout;
 
 export default function App() {
   return (
@@ -81,16 +87,14 @@ function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body style={{ margin: 0 }}>
-        <AntDLayout style={{ minHeight: "100vh" }}>
-          <Header
-            style={{
-              position: "sticky",
-              top: 0,
-              zIndex: 1,
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
+        <ConfigProvider
+          theme={{
+            token: {
+              fontFamily: "Roboto, sans-serif",
+            },
+          }}
+        >
+          <AntDLayout style={{ minHeight: "100vh" }}>
             <Menu
               theme="dark"
               mode="horizontal"
@@ -99,24 +103,25 @@ function Layout({ children }: { children: React.ReactNode }) {
               onClick={handleNavClick}
               disabledOverflow={true}
             />
-          </Header>
-          <AntDLayout>
-            <Content style={{ margin: "0 16px" }}>
-              {/* <Breadcrumb style={{ margin: "16px 0" }}>
+
+            <AntDLayout>
+              <div style={{ margin: "0 16px" }}>
+                {/* <Breadcrumb style={{ margin: "16px 0" }}>
                 <Breadcrumb.Item>User</Breadcrumb.Item>
                 <Breadcrumb.Item>Guest</Breadcrumb.Item>
               </Breadcrumb> */}
-              <div
-                style={{
-                  paddingTop: 16,
-                  background: colorBgContainer,
-                }}
-              >
-                {children}
+                <div
+                  style={{
+                    paddingTop: 16,
+                    background: colorBgContainer,
+                  }}
+                >
+                  {children}
+                </div>
               </div>
-            </Content>
+            </AntDLayout>
           </AntDLayout>
-        </AntDLayout>
+        </ConfigProvider>
       </body>
     </html>
   );

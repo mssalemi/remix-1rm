@@ -80,7 +80,7 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
     </div>
   );
   return (
-    <Card title={"Program Overview"} extra={oneRepMaxMarkup}>
+    <Card title={"Full Program"} extra={oneRepMaxMarkup}>
       {
         <>
           {workoutProgram.weeklyWorkouts.map((workoutWeek, index) => {
