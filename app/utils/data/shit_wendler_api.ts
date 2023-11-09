@@ -18,16 +18,19 @@ export function WENDLER_DAILY_WORKOUT__BENCH(oneRepMax: number): DailyWorkout {
             reps: 5,
             weight: oneRepMax * 0.65,
             repeat: 1,
+            desc: `${0.65 * 100}%`,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.75,
             repeat: 1,
+            desc: `${0.75 * 100}%`,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.85,
             repeat: 1,
+            desc: `${0.85 * 100}%`,
           },
         ],
       },
@@ -39,6 +42,7 @@ export function WENDLER_DAILY_WORKOUT__BENCH(oneRepMax: number): DailyWorkout {
             reps: 10,
             weight: oneRepMax * 0.45,
             repeat: 5,
+            desc: `${0.45 * 100}%`,
           },
         ],
       },
@@ -50,6 +54,7 @@ export function WENDLER_DAILY_WORKOUT__BENCH(oneRepMax: number): DailyWorkout {
             reps: 10,
             weight: oneRepMax * 0.7,
             repeat: 3,
+            desc: `${0.7 * 100}%`,
           },
         ],
       },
@@ -61,6 +66,7 @@ export function WENDLER_DAILY_WORKOUT__BENCH(oneRepMax: number): DailyWorkout {
             reps: 10,
             weight: 0,
             repeat: 3,
+            desc: "Bodyweight",
           },
         ],
       },
@@ -80,16 +86,19 @@ export function WENDLER_DAILY_WORKOUT_SQUAT(oneRepMax: number): DailyWorkout {
             reps: 5,
             weight: oneRepMax * 0.65,
             repeat: 1,
+            desc: `${0.65 * 100}%`,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.75,
             repeat: 1,
+            desc: `${0.75 * 100}%`,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.85,
             repeat: 1,
+            desc: `${0.85 * 100}%`,
           },
         ],
       },
@@ -101,6 +110,7 @@ export function WENDLER_DAILY_WORKOUT_SQUAT(oneRepMax: number): DailyWorkout {
             reps: 10,
             weight: oneRepMax * 0.7,
             repeat: 3,
+            desc: `${0.7 * 100}%`,
           },
         ],
       },
@@ -122,16 +132,19 @@ export function WENDLER_DAILY_WORKOUT_DEADLIFT(
             reps: 5,
             weight: oneRepMax * 0.65,
             repeat: 1,
+            desc: `${0.65 * 100}%`,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.75,
             repeat: 1,
+            desc: `${0.75 * 100}%`,
           },
           {
             reps: 5,
             weight: oneRepMax * 0.85,
             repeat: 1,
+            desc: `${0.85 * 100}%`,
           },
         ],
       },
@@ -221,6 +234,7 @@ function createWendlerWorkoutWeek(
       reps: rep,
       weight: bench * repPercentages[index],
       repeat: 1,
+      desc: `${repPercentages[index] * 100}%`,
     };
   });
 
@@ -235,6 +249,7 @@ function createWendlerWorkoutWeek(
       reps: rep,
       weight: bench * repPercentages[index],
       repeat: 2,
+      desc: `${repPercentages[index] * 100}%`,
     };
   });
 
@@ -248,6 +263,7 @@ function createWendlerWorkoutWeek(
     reps: 10,
     weight: 0,
     repeat: 3,
+    desc: "RPE 9",
   };
 
   const benchTricepExercise: Exercise = {
@@ -260,6 +276,7 @@ function createWendlerWorkoutWeek(
     reps: 15,
     weight: 0,
     repeat: 4,
+    desc: "bodyweight",
   };
 
   const benchAbsExercise: Exercise = {
@@ -273,6 +290,7 @@ function createWendlerWorkoutWeek(
       reps: rep,
       weight: squat * repPercentages[index],
       repeat: 1,
+      desc: `${repPercentages[index] * 100}%`,
     };
   });
 
@@ -287,6 +305,7 @@ function createWendlerWorkoutWeek(
       reps: rep,
       weight: squat * repPercentages[index],
       repeat: 2,
+      desc: `${repPercentages[index] * 100}%`,
     };
   });
 
@@ -301,6 +320,7 @@ function createWendlerWorkoutWeek(
       reps: rep,
       weight: deadlift * repPercentages[index],
       repeat: 1,
+      desc: `${repPercentages[index] * 100}%`,
     };
   });
 

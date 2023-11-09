@@ -5,6 +5,7 @@ export interface Exercise {
     reps: number;
     weight: number;
     repeat: number;
+    desc: string;
   }[];
 }
 
