@@ -9,7 +9,13 @@ interface Section {
   title: string;
   icon: JSX.Element;
   designedBy: string;
-  content: string;
+  content: Content;
+}
+
+interface Content {
+  title?: string;
+  catchPhrase?: string;
+  body: string;
 }
 
 interface Props {
@@ -17,13 +23,16 @@ interface Props {
   sections: Section[];
 }
 
-const SECTIONS = [
+const SECTIONS: Section[] = [
   {
     title: "Introduction to Wendler 5/3/1",
     icon: <AntDesignOutlined />,
     designedBy: "Jim Wendler",
-    content:
-      "Meet the Wendler 5/3/1 Routine, the brainchild of Jim Wendler. This workout sensation is like the tortoise of strength training—slow, steady, and starting with weights so light they're practically telling knock-knock jokes. Named after the catchy rep scheme 5, 3, 1, this program is all about working with percentages based on your max and chasing after those sweet rep personal records in each session.\n\nNow, is Jim Wendler’s 5/3/1 the fitness love story for you? Well, it's the versatile Romeo of routines—suitable for all experience levels, but it tends to swipe right on those intermediate athletes. If you're into quick dates (read: short training sessions) and a relationship that progresses at the pace of a sloth on a casual stroll, then 5/3/1 might just be your swolemate. According to Jim, starting light is like giving your lifting journey a VIP pass to the gains party. Get ready to lift and laugh your way to progress!",
+    content: {
+      body: "Step into the world of 5/3/1 – Jim Wendler's masterplan for gains as reliable as your grandma's secret cookie recipe. Think of it like a well-organized library, with cycles neatly stacked in 4-week chapters. You've got options: be the gym socialite, hitting it 4 days a week, or the introvert with a cool 3-day routine. The sweet spot? Four days, no doubt. Each day is a focused mission, centering around one of the main four: Military Press, Deadlift, Bench Press, and Squat. But, here's the twist – if you're in the three-day club, no repeats allowed. It's like a playlist with no shuffle button. Week by week, you'll be chasing rep-set goals, like a diligent detective on the trail. Week 1: 3 sets of 5 reps – the 'warm-up.' Week 2: 3 sets of 3 reps – where things get real. Week 3: 1 set of 5 reps, 1 set of 3 reps, and 1 set of 1 rep – the 'triple play.' Week 4: Deloading – your chance to lift weights with a laid-back vibe.",
+      catchPhrase:
+        "Gains are as steady as a tortoise, and every set is a step towards predictable progress.",
+    },
   },
 ];
 
@@ -55,13 +64,21 @@ export function WorkoutContent({ title, sections = SECTIONS }: Props) {
           >
             Author: {section.designedBy}
           </Text>
+
           <Text
             style={{
               padding: "1rem 0",
             }}
           >
-            {section.content}
+            {section.content.body}
           </Text>
+          <div
+            style={{
+              alignSelf: "center",
+            }}
+          >
+            <Text strong>{section.content.catchPhrase}</Text>
+          </div>
         </div>
       ))}
     </div>
