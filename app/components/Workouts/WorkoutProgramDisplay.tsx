@@ -4,7 +4,7 @@ import { WeeklyWorkoutDisplay } from "./WorkoutDisplay";
 
 import type { WorkoutProgram } from "app/utils/types/types";
 
-import { WorkoutContent } from "./components/WorkoutContent";
+import { WorkoutContent, WorkoutProgramHero } from "./components";
 
 import { Image, Form, Button, InputNumber } from "antd";
 interface Props {
@@ -87,22 +87,19 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          height: "100%",
         }}
       >
-        <WorkoutContent />
+        <WorkoutContent title={"Meow"} sections={[]} />
       </div>
       {
         <>
           <div
             style={{
-              height: 100,
-              border: "1px solid red",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              paddingTop: "1rem",
             }}
           >
-            Full Program - Header
+            <WorkoutProgramHero />
           </div>
           <div
             style={{

@@ -1,1 +1,2 @@
-export { WokroutContent } from "./WorkoutContent";
+export { WorkoutContent } from "./WorkoutContent";
+export { WorkoutProgramHero } from "./WorkoutProgramHero";

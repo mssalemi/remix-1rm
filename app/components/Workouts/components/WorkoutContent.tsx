@@ -62,7 +62,7 @@ export function WorkoutContent({ title, sections = SECTIONS }: Props) {
             }}
             type="secondary"
           >
-            Author: {section.designedBy}
+            Designed by: {section.designedBy}
           </Text>
 
           <Text
