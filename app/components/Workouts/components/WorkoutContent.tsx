@@ -59,10 +59,19 @@ export function WorkoutContent({ title, sections = SECTIONS }: Props) {
           <Text
             style={{
               fontSize: "0.7rem",
+              paddingTop: "0.5rem",
             }}
             type="secondary"
           >
             Designed by: {section.designedBy}
+          </Text>
+          <Text
+            style={{
+              fontSize: "0.7rem",
+            }}
+            type="secondary"
+          >
+            Content: {"XYZ Team"}
           </Text>
 
           <Text
