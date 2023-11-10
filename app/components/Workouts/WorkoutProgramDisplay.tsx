@@ -4,7 +4,9 @@ import { WeeklyWorkoutDisplay } from "./WorkoutDisplay";
 
 import type { WorkoutProgram } from "app/utils/types/types";
 
-import { Card, Space, Form, Button, InputNumber } from "antd";
+import { WorkoutContent } from "./components/WorkoutContent";
+
+import { Image, Form, Button, InputNumber } from "antd";
 interface Props {
   workoutProgram: WorkoutProgram;
   setOneRepMax: React.Dispatch<
@@ -50,12 +52,7 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
   };
 
   const oneRepMaxMarkup = (
-    <div
-      style={{
-        alignSelf: "center",
-        justifyItems: "center",
-      }}
-    >
+    <div>
       <Form
         layout="horizontal"
         initialValues={{ size: componentSize }}
@@ -64,14 +61,11 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
         style={{ maxWidth: 600 }}
         onFinish={handleSubmit}
       >
-        <Space.Compact>
-          {compoundExercises.map(({ key, name, altName }, index) => (
-            <Form.Item key={key} name={key}>
-              {/* <Tag color="#2db7f5">{name}</Tag> */}
-              <InputNumber placeholder={altName} size="middle" />
-            </Form.Item>
-          ))}
-        </Space.Compact>
+        {compoundExercises.map(({ key, name, altName }, index) => (
+          <Form.Item key={key} name={key}>
+            <InputNumber placeholder={altName} size="middle" />
+          </Form.Item>
+        ))}
 
         <Button type="primary" htmlType="submit">
           Generate Workout Program
@@ -80,9 +74,46 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
     </div>
   );
   return (
-    <Card title={"Full Program"} extra={oneRepMaxMarkup}>
+    <div>
+      <div style={{}}>
+        <Image
+          src={
+            "https://www.jimwendler.com/cdn/shop/products/531banner_copy2_1376x704.jpg?v=1631660295"
+          }
+        />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <WorkoutContent />
+      </div>
       {
         <>
+          <div
+            style={{
+              height: 100,
+              border: "1px solid red",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            Full Program - Header
+          </div>
+          <div
+            style={{
+              border: "1px solid red",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {oneRepMaxMarkup}
+          </div>
           {workoutProgram.weeklyWorkouts.map((workoutWeek, index) => {
             return (
               <WeeklyWorkoutDisplay
@@ -94,6 +125,17 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
           })}
         </>
       }
-    </Card>
+      <div
+        style={{
+          height: 400,
+          border: "1px solid black",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Workout Tips - Content
+      </div>
+    </div>
   );
 }

@@ -1,0 +1,1 @@
+export { WokroutContent } from "./WorkoutContent";

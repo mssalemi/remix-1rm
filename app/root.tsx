@@ -22,9 +22,11 @@ import { useEffect, useState } from "react";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap",
+  },
 ];
-
-const { Content } = AntDLayout;
 
 export default function App() {
   return (
@@ -83,6 +85,10 @@ function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+        />
         <Meta />
         <Links />
       </head>
@@ -91,6 +97,12 @@ function Layout({ children }: { children: React.ReactNode }) {
           theme={{
             token: {
               fontFamily: "Roboto, sans-serif",
+              colorPrimary: "#2b4acb",
+            },
+            components: {
+              Menu: {
+                darkItemBg: "#131629",
+              },
             },
           }}
         >
