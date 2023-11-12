@@ -53,6 +53,8 @@ function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (location.pathname.includes("workouts")) {
       setCurrent("workouts");
+    } else if (location.pathname.includes("strength-standards")) {
+      setCurrent("strengthStandards");
     } else {
       setCurrent("oneRepMax");
     }
@@ -72,6 +74,11 @@ function Layout({ children }: { children: React.ReactNode }) {
       key: "workouts",
       label: "Workouts",
       path: "/workouts",
+    },
+    {
+      key: "strengthStandards",
+      label: "Strength Standards",
+      path: "/strength-standards",
     },
   ];
 
