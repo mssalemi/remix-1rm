@@ -20,26 +20,15 @@ export function WorkoutProgramHero() {
         </Col>
         <Col
           style={{
-            border: "1px solid black",
-            minHeight: "inherit",
-          }}
-          xs={12}
-          sm={12}
-          md={8}
-        >
-          <p>Workout Program Description</p>
-        </Col>
-        <Col
-          style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr",
             justifyItems: "center",
             textAlign: "center",
             minHeight: "inherit",
           }}
-          xs={12}
-          sm={12}
-          md={8}
+          xs={24}
+          sm={24}
+          md={24}
         >
           <Statistic title="Days" value={"3 - 4"} />
           <Statistic title="Weeks" value={"4"} />

@@ -4,7 +4,11 @@ import { WeeklyWorkoutDisplay } from "./WorkoutDisplay";
 
 import type { WorkoutProgram } from "app/utils/types/types";
 
-import { WorkoutContent, WorkoutProgramHero } from "./components";
+import {
+  GenerateWorkoutProgramForm,
+  WorkoutContent,
+  WorkoutProgramHero,
+} from "./components";
 
 import { Image, Form, Button, InputNumber } from "antd";
 interface Props {
@@ -52,27 +56,26 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
   };
 
   const oneRepMaxMarkup = (
-    <div>
-      <Form
-        layout="horizontal"
-        initialValues={{ size: componentSize }}
-        onValuesChange={onFormLayoutChange}
-        size={componentSize as SizeType}
-        style={{ maxWidth: 600 }}
-        onFinish={handleSubmit}
-      >
-        {compoundExercises.map(({ key, name, altName }, index) => (
-          <Form.Item key={key} name={key}>
-            <InputNumber placeholder={altName} size="middle" />
-          </Form.Item>
-        ))}
+    <Form
+      // layout="horizontal"
+      // initialValues={{ size: componentSize }}
+      title={"Generate Workout Program"}
+      onValuesChange={onFormLayoutChange}
+      size={componentSize as SizeType}
+      onFinish={handleSubmit}
+    >
+      {compoundExercises.map(({ key, name, altName }, index) => (
+        <Form.Item key={key} name={key}>
+          <InputNumber placeholder={altName} size="large" />
+        </Form.Item>
+      ))}
 
-        <Button type="primary" htmlType="submit">
-          Generate Workout Program
-        </Button>
-      </Form>
-    </div>
+      <Button type="primary" htmlType="submit">
+        Generate Workout Program
+      </Button>
+    </Form>
   );
+
   return (
     <div>
       <div style={{}}>
@@ -102,12 +105,20 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
             <WorkoutProgramHero />
           </div>
           <div
-            style={{
-              border: "1px solid red",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+            style={
+              {
+                // border: "1px dotted red",
+              }
+            }
+          >
+            <GenerateWorkoutProgramForm setOneRepMax={setOneRepMax} />
+          </div>
+          <div
+            style={
+              {
+                // border: "1px dotted red",
+              }
+            }
           >
             {oneRepMaxMarkup}
           </div>
@@ -125,7 +136,7 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
       <div
         style={{
           height: 400,
-          border: "1px solid black",
+          border: "1px solid dotted",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

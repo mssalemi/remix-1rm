@@ -118,10 +118,6 @@ function Layout({ children }: { children: React.ReactNode }) {
 
             <AntDLayout>
               <div style={{ margin: "0 16px" }}>
-                {/* <Breadcrumb style={{ margin: "16px 0" }}>
-                <Breadcrumb.Item>User</Breadcrumb.Item>
-                <Breadcrumb.Item>Guest</Breadcrumb.Item>
-              </Breadcrumb> */}
                 <div
                   style={{
                     paddingTop: 16,
