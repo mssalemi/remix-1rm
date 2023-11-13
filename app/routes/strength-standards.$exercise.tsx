@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams } from "@remix-run/react";
 
-import { Row, Col, Typography, Tag, Table } from "antd";
+import { Row, Col, Typography, Tag, Table, Tabs } from "antd";
+
+import type { TabsProps } from "antd";
+
+import type { ColumnsType } from "antd/es/table";
 
 import { trainingLevels } from "./strength-standards._index";
 
@@ -91,16 +95,61 @@ const data: BenchPressDataRow[] = weightArray.map((bodyWeight) => {
   };
 });
 
+const dataFemale: BenchPressDataRow[] = weightArray.map((bodyWeight) => {
+  const calculateOneRepMax = (trainingLevelIndex: number) => {
+    const result = calculateOneRepMaxRequired(
+      30,
+      bodyWeight,
+      trainingLevels[trainingLevelIndex],
+      "female"
+    );
+    return Math.round(result.weight);
+  };
+
+  return {
+    bodyWeight,
+    untrained: calculateOneRepMax(0),
+    novice: calculateOneRepMax(1),
+    intermediate: calculateOneRepMax(2),
+    advanced: calculateOneRepMax(3),
+    elite: calculateOneRepMax(4),
+    godlyStrength: calculateOneRepMax(5),
+  };
+});
+
 export default function StrengthStandardByExercise() {
   console.log(data);
 
   const { exercise } = useParams();
-  trainingLevels.forEach((trainingLevel) => {
-    console.log(
-      trainingLevel.name,
-      calculateOneRepMaxRequired(30, 180, trainingLevel).weight
-    );
-  });
+
+  const onChange = (key: string) => {
+    console.log(key);
+  };
+
+  const items: TabsProps["items"] = [
+    {
+      key: "1",
+      label: "Men",
+      children: (
+        <Table
+          columns={columns}
+          dataSource={data}
+          pagination={{ pageSize: 6, defaultCurrent: 2 }}
+        />
+      ),
+    },
+    {
+      key: "2",
+      label: "Women",
+      children: (
+        <Table
+          columns={columns}
+          dataSource={dataFemale}
+          pagination={{ pageSize: 6, defaultCurrent: 2 }}
+        />
+      ),
+    },
+  ];
 
   return (
     <Row
@@ -113,21 +162,34 @@ export default function StrengthStandardByExercise() {
       </Col>
       <Col span={24}>
         <Typography.Text>
-          Welcome to the realm of the Iron Giants, where mere mortals look up to
-          you with a mix of awe and confusion. You've transcended the ordinary,
-          turning the gym into your personal playground. As an elite lifter,
-          you're not just lifting weights; you're orchestrating a symphony of
-          strength that leaves everyone else wondering if they accidentally
-          stumbled into a superhero convention.
+          Embark on a journey to redefine your bench press prowess with our
+          meticulously curated strength standards table for males. Whether
+          you're a seasoned lifter or just stepping into the world of weight
+          training, this table provides a comprehensive guide to elevate your
+          bench press game. Each category, from "Untrained" to "World-Class," is
+          tailored to showcase achievable targets based on body weight
+          multiples. It's not just about lifting weights; it's about setting
+          personalized benchmarks for success. Indulge in the details, discover
+          where you stand, and let the numbers be your motivation. Our table is
+          designed to inspire and guide you through your bench press milestones.
+          It's not a competition against others; it's a celebration of your
+          individual strength journey. So, grasp that barbell, aim for your
+          category, and witness the transformation of your bench press from a
+          movement to a statement of strength. Happy lifting! 🏋️‍♂️💪
         </Typography.Text>
-        <br />
-        <Typography.Title level={4}>Bench Press - Adult Men</Typography.Title>
       </Col>
-      <Col span={12}>
-        <Table
-          columns={columns}
-          dataSource={data}
-          pagination={{ pageSize: 6, defaultCurrent: 2 }}
+      <Col
+        span={24}
+        style={{
+          overflow: "auto",
+          whiteSpace: "nowrap",
+        }}
+      >
+        <Tabs
+          defaultActiveKey="1"
+          items={items}
+          onChange={onChange}
+          indicatorSize={(origin) => origin - 16}
         />
       </Col>
     </Row>
@@ -143,15 +205,21 @@ interface TrainingLevel {
   name: string;
   description: string;
   color: string;
+  gender?: string;
 }
 
 function calculateOneRepMaxRequired(
   age: number,
   bodyweight: number,
-  trainingLevel: TrainingLevel
+  trainingLevel: TrainingLevel,
+  gender: string = "male"
 ): OneRepMaxResult {
   // Adjust bodyweight for age (15% less for 45+)
-  const adjustedBodyweight = age >= 45 ? bodyweight * 0.85 : bodyweight;
+  let adjustedBodyweight = age >= 45 ? bodyweight * 0.85 : bodyweight;
+
+  if (gender == "female") {
+    adjustedBodyweight = adjustedBodyweight * 0.75;
+  }
 
   // Powerlifting WILK standards for males in the 18-45 age category
   const standards = {

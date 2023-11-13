@@ -22,21 +22,21 @@ const exerciseDescriptions = [
     description:
       "A workout for your legs and a metaphor for life – keep pushing up, even when it feels like everything's coming down.",
   },
-  {
-    exercise: "Press",
-    description:
-      "Not the 'send' kind, but the 'press' kind. Elevate your bar, elevate your standards.",
-  },
-  {
-    exercise: "Snatch",
-    description:
-      "Not a sneaky robbery but a powerful lift. It's time to snatch that prowess and run with it.",
-  },
-  {
-    exercise: "Clean and Jerk",
-    description:
-      "Forget the dishes; let's get those lifts sparkling, and by lifts, we mean your technique, not your kitchen.",
-  },
+  // {
+  //   exercise: "Press",
+  //   description:
+  //     "Not the 'send' kind, but the 'press' kind. Elevate your bar, elevate your standards.",
+  // },
+  // {
+  //   exercise: "Snatch",
+  //   description:
+  //     "Not a sneaky robbery but a powerful lift. It's time to snatch that prowess and run with it.",
+  // },
+  // {
+  //   exercise: "Clean and Jerk",
+  //   description:
+  //     "Forget the dishes; let's get those lifts sparkling, and by lifts, we mean your technique, not your kitchen.",
+  // },
 ];
 
 export const trainingLevels = [
@@ -89,33 +89,55 @@ export default function StrengthStandardsIndex() {
       }}
     >
       <Col span={24}>
-        <Typography.Title>Strength Standards</Typography.Title>
+        <Typography.Title>
+          Exploring Strength Standards: Unveiling the Benchmarks
+        </Typography.Title>
         <Typography.Paragraph>
-          Step into the strength city – where we're serious about lifting, but
-          not so serious that we won't crack a joke or two. Our strength
-          benchmarks are not your average fitness targets; think of them as
-          friendly nudges, urging you to surpass what you thought were your
-          limits.
+          Ever wondered about the origin of strength standards? Initially
+          designed by powerlifting organizations to rank their contenders, these
+          benchmarks emerged from the world of powerlifting – a sport centered
+          around achieving maximum strength in squats, bench presses, and
+          deadlifts. The combined one-repetition max (1RM) in these lifts
+          determines your "total" score.
         </Typography.Paragraph>
-        <Button onClick={() => navigate("/strength-standards/bench")}>
-          SEE BENCH STANDARDS
-        </Button>
       </Col>
-      <Col span={12}>
+      <Col xs={24} sm={24} md={24} lg={16}>
         <List
           itemLayout="horizontal"
           dataSource={exerciseDescriptions}
           renderItem={({ exercise, description }, index) => (
             <List.Item>
-              <List.Item.Meta
-                avatar={
-                  <Avatar
-                    src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}
-                  />
-                }
-                title={exercise}
-                description={description}
-              />
+              {/* <List.Item.Meta title={exercise} description={description} /> */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 4fr 4fr",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Avatar
+                  src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}
+                />
+                <div>
+                  <Typography.Title level={5}>{exercise}</Typography.Title>
+                  <Typography.Text>{description}</Typography.Text>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Button
+                    type="primary"
+                    onClick={() => navigate("/strength-standards/bench")}
+                  >
+                    Bench Standards
+                  </Button>
+                </div>
+              </div>
             </List.Item>
           )}
         />
@@ -123,22 +145,20 @@ export default function StrengthStandardsIndex() {
 
       <Col span={24}>
         <Typography.Paragraph>
-          Our performance standards are not here to fuel an ego race but to
-          spark the fire within you. We've got a nifty calculator to estimate
-          your one-rep max because we believe in science, not sorcery. Age is
-          just a number, and weight is just a measure – your journey is uniquely
-          yours.
+          Powerlifting strength standards are calculated by summing up the 1RM
+          for squat, bench press, and deadlift. However, many coaches have
+          expanded these standards to include additional exercises like the
+          overhead press, pull-up, front squat, and barbell row.
         </Typography.Paragraph>
         <Typography.Paragraph>
-          Remember, these standards are not about fitting into a mold; they're
-          about breaking it and sculpting your own fitness narrative. So, lace
-          up those sneakers, grab your water bottle, and let's turn those
-          lifting dreams into reality. You're not just lifting weights; you're
-          lifting your own standards. Cheers to the gains, the grins, and the
-          glorious journey ahead! 💪✨
+          For those pursuing health, muscle development, and strength without
+          venturing into competitive powerlifting or relying on external aids,
+          alternative strength standards come into play. The Best Strength
+          Standards for Every Lifter: Among various strength standards, two
+          noteworthy recommendations are:
         </Typography.Paragraph>
       </Col>
-      <Col span={12}>
+      <Col xs={16} sm={16} md={16} lg={16}>
         <List
           dataSource={trainingLevels}
           renderItem={(item) => {
@@ -146,7 +166,7 @@ export default function StrengthStandardsIndex() {
               <List.Item
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
+                  gridTemplateColumns: "1fr 1fr 1fr",
                 }}
               >
                 <Tag
@@ -169,6 +189,20 @@ export default function StrengthStandardsIndex() {
             );
           }}
         />
+      </Col>
+      <Col span={24}>
+        <Typography.Paragraph>
+          These standards offer different perspectives – one based on body
+          weight multiples. Whether you choose one or both depends on personal
+          preference. The standards, shaped by decades of experience in
+          powerlifting, present achievable targets categorized by relative body
+          weight or absolute weight. Deciding which to use often depends on
+          established standards for specific exercises. In the realm of strength
+          standards, these guidelines serve as more realistic benchmarks for
+          everyday lifters. They pave the way for a balanced and achievable
+          journey to strength. Remember, these numbers are not limits but
+          stepping stones on your path to greatness. Happy lifting! 🏋️‍♂️💪
+        </Typography.Paragraph>
       </Col>
     </Row>
   );
