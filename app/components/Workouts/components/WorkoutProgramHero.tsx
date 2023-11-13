@@ -8,23 +8,13 @@ export function WorkoutProgramHero() {
     <>
       <Row>
         <Col
-          xs={24}
-          sm={24}
-          md={8}
-          style={{
-            border: "1px solid black",
-            minHeight: "inherit",
-          }}
-        >
-          <p>Full Workout Program</p>
-        </Col>
-        <Col
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr",
             justifyItems: "center",
             textAlign: "center",
             minHeight: "inherit",
+            border: "1px solid black",
           }}
           xs={24}
           sm={24}
