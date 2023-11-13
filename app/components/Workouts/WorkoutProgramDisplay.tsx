@@ -42,42 +42,7 @@ const compoundExercises = [
   },
 ];
 
-type SizeType = Parameters<typeof Form>[0]["size"];
-
 export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
-  const [componentSize, setComponentSize] = useState<SizeType | "default">(
-    "default"
-  );
-
-  const onFormLayoutChange = ({ size }: { size: SizeType }) => {
-    setComponentSize(size);
-  };
-
-  const handleSubmit = (values: any) => {
-    setOneRepMax(values);
-  };
-
-  const oneRepMaxMarkup = (
-    <Form
-      // layout="horizontal"
-      // initialValues={{ size: componentSize }}
-      title={"Generate Workout Program"}
-      onValuesChange={onFormLayoutChange}
-      size={componentSize as SizeType}
-      onFinish={handleSubmit}
-    >
-      {compoundExercises.map(({ key, name, altName }, index) => (
-        <Form.Item key={key} name={key}>
-          <InputNumber placeholder={altName} size="large" />
-        </Form.Item>
-      ))}
-
-      <Button type="primary" htmlType="submit">
-        Generate Workout Program
-      </Button>
-    </Form>
-  );
-
   return (
     <div>
       {/* Main Image */}
@@ -258,45 +223,67 @@ export function WorkoutProgramDisplay({ workoutProgram, setOneRepMax }: Props) {
             </Col>
           </Row>
 
-          <div
-            style={
-              {
-                // border: "1px dotted red",
-              }
-            }
+          <Row
+            style={{
+              justifyContent: "center",
+              padding: "1rem 0",
+            }}
           >
-            <GenerateWorkoutProgramForm setOneRepMax={setOneRepMax} />
-          </div>
-          <div
-            style={
-              {
-                // border: "1px dotted red",
-              }
-            }
-          >
-            {oneRepMaxMarkup}
-          </div>
+            <Col span={12}>
+              <GenerateWorkoutProgramForm setOneRepMax={setOneRepMax} />
+            </Col>
+          </Row>
           {workoutProgram.weeklyWorkouts.map((workoutWeek, index) => {
             return (
-              <WeeklyWorkoutDisplay
-                key={index}
-                days={workoutWeek.days}
-                title={workoutWeek.title}
-              />
+              <div
+                style={{
+                  padding: "0.5rem 0",
+                }}
+              >
+                <WeeklyWorkoutDisplay
+                  key={index}
+                  days={workoutWeek.days}
+                  title={workoutWeek.title}
+                />
+              </div>
             );
           })}
         </>
       }
-      <div
-        style={{
-          height: 400,
-          border: "1px solid dotted",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        Workout Tips - Content
+      <div>
+        <Typography.Title level={4} code>
+          Conclusion
+        </Typography.Title>
+        <Typography.Paragraph ellipsis>
+          In conclusion, the 5/3/1 program, with its proven versatility and
+          adaptability, stands as a reliable choice for intermediate lifters
+          seeking continued strength development. As we've explored the
+          intricacies of the program, from its main lift progressions to popular
+          assistance templates, it's evident that 5/3/1 offers a balanced blend
+          of intensity and volume.
+        </Typography.Paragraph>
+        <Typography.Paragraph>
+          Remember, whether you choose additional volume for muscle growth or
+          opt for added intensity, the beauty of 5/3/1 lies in its status as a
+          template. It allows you to tailor your training experience to meet
+          your specific needs, be it for powerlifting or Olympic weightlifting.
+          As you embark on your 5/3/1 journey, consider not only the variations
+          that suit your goals, schedule, and personal preferences but also pay
+          careful attention to rest and recovery. Adequate sleep, proper
+          nutrition, and smart recovery strategies are integral to maximizing
+          the benefits of the 5/3/1 program. Like any program, success with
+          5/3/1 requires commitment, consistency, and a holistic approach that
+          extends beyond the gym. Happy lifting, and may your strength journey
+          be both challenging and rewarding!
+        </Typography.Paragraph>
+        <br />
+        <Typography.Paragraph>
+          As you embark on your 5/3/1 journey, consider the variations that suit
+          your goals, schedule, and personal preferences. Like any program,
+          success with 5/3/1 requires commitment, consistency, and the
+          flexibility to make it your own. Happy lifting, and may your strength
+          journey be both challenging and rewarding!
+        </Typography.Paragraph>
       </div>
     </div>
   );

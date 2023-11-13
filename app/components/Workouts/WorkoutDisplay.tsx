@@ -14,16 +14,12 @@ interface Props {
 export function WeeklyWorkoutDisplay({ days, title }: Props) {
   return (
     <>
-      <Card type="inner" title={title} size="small" style={{}}>
+      <Card type="inner" title={title} size="small">
         <Row gutter={[12, 12]}>
           {days.map((dailyWorkout: DailyWorkout) => {
             return (
               <Col key={dailyWorkout.title} xs={24} sm={12} md={6}>
-                <div
-                  style={{
-                    height: "100%",
-                  }}
-                >
+                <div>
                   <div>
                     <Text
                       style={{
